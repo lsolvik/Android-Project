@@ -1,12 +1,13 @@
 package com.example.group8.dindrikkelek;
 
 public class Lek {
+
     private int idLek_PK;
     private String lekNavn;
     private String utfall_FK;
     private String beskrivelse;
 
-   // public Lek() {}
+    // public Lek() {}
     public Lek (int id, String leknavn, String beskrivelsen) {
         this.idLek_PK = id;
         this.lekNavn = leknavn;
