@@ -37,4 +37,8 @@ public class Lek {
         this.beskrivelse = beskrivelse;
     }
 
+    public String fuckoff() {
+        return lekNavn;
+    }
+
 }
