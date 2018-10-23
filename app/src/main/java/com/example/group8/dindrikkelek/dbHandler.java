@@ -57,4 +57,7 @@ public class dbHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void test() {
+    }
+
 }
