@@ -6,4 +6,5 @@
     <string name="nav_instillinger">Instillinger</string>
     <string name="nav_help">Hjelp</string>
     <string name="nav_feedback">Gi tilbakemelding</string>
+    <string name="toolbar_menu_hamburger">Meny</string>
 </resources>

@@ -4,9 +4,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.Toast;
+import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,8 +20,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_meny_hamburger);
+        //ber activity om å bruke toolbar som sin app bar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //setter icon til drawable
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_hamburger);
 
         SQLiteOpenHelper dbhandler = new dbHandler(this);
         try {
@@ -35,11 +43,33 @@ public class MainActivity extends AppCompatActivity {
                 cursor.close();
                 db.close();
             }
-
         } catch (SQLiteException e) {
             Toast toast = Toast.makeText(this, "Database ikke tilgjengelig.", Toast.LENGTH_SHORT);
             toast.show();
         }
-
     }
+
+    //Implementing this method adds any items in
+    //the menu resource file to the app bar.
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the app bar.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //This method gets called when an
+    //action on the app bar is clicked.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        switch (item.getItemId()) {
+            case R.id.action_menu:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
