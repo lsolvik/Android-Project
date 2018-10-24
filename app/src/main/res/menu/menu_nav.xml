@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/navn_spill"
-        android:icon="@android:drawable/ic_media_play"
-        android:title="@string/nav_spill"/>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navn_spill"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="@string/nav_spill"
+            android:checked="true"/>
+
+        <item
+            android:id="@+id/nav_endreleker"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="@string/nav_Endreleker"
+          />
+        <item
+            android:id="@+id/nav_bildegalleri"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/nav_bilder"
+
+            />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@android:drawable/ic_menu_preferences"
+            android:title="@string/nav_instillinger"
+            />
+    </group>
+        <item android:title="@string/nav_support">
+            <menu>
+                <item
+                    android:id="@+id/nav_review"
+                    android:icon="@android:drawable/sym_action_chat"
+                    android:title="@string/nav_feedback"
+                    />
+                <item
+                    android:id="@+id/nav_help"
+                    android:icon="@android:drawable/ic_menu_help"
+                    android:title="@string/nav_help"/>
+            </menu>
+        </item>
+
+
+
 </menu>
