@@ -15,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_meny_hamburger);
+
         SQLiteOpenHelper dbhandler = new dbHandler(this);
         try {
             SQLiteDatabase db = dbhandler.getWritableDatabase();
