@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+
         switch (item.getItemId()) {
             case R.id.action_menu:
                 drawerLayout.openDrawer(GravityCompat.START);
