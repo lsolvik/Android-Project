@@ -1,13 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".nyttBilde">
 
-    <TextView
+    <ImageView
+        android:id="@+id/valgtBilde"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="150dp"
+        android:contentDescription="@string/bilde"
+        android:src="@drawable/drink_img" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/nyttBildeTittel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:text="@string/bildetittel" />
+
+    <Button
+        android:id="@+id/galleri"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/galleri" />
+
+    <Button
+        android:id="@+id/kamera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/kamera" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/tilbake"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tilbake" />
+
+        <Button
+            android:id="@+id/lagre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lagre" />
+
+    </LinearLayout>
+
+</LinearLayout>

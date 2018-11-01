@@ -12,7 +12,8 @@
     <string name="endre_twist">Endre Twist</string>
     <string name="fjern_twist">Fjern Twist</string>
     <string name="legg_til_bilde">Legg til bilde</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bilde">Bilde</string>
+    <string name="bildetittel">Bildetittel</string>
+    <string name="galleri">Galleri</string>
+    <string name="kamera">Kamera</string>
 </resources>
