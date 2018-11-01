@@ -30,8 +30,6 @@ public class EndreLeggTil extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Fragment fragment = null;
-
         switch (view.getId()) {
             case R.id.leggTilBilde:
                 getFragmentManager().beginTransaction().replace(R.id.content_frame,
