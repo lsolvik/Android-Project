@@ -4,6 +4,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import android.view.Menu;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //setter icon til drawable
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_hamburger);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         SQLiteOpenHelper dbhandler = new dbHandler(this);
         try {
@@ -73,4 +78,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+
+        switch (menuItem.getItemId()) {
+            case R.id.nav_endreleker:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                        new EndreLeggTil()).commit();
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }

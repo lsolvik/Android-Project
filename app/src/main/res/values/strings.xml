@@ -8,4 +8,11 @@
     <string name="nav_feedback">Gi tilbakemelding</string>
     <string name="nav_support">Brukerstøtte</string>
     <string name="toolbar_menu_hamburger">Meny</string>
+    <string name="legg_til_twist">Legg til Twist</string>
+    <string name="endre_twist">Endre Twist</string>
+    <string name="fjern_twist">Fjern Twist</string>
+    <string name="legg_til_bilde">Legg til bilde</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
