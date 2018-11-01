@@ -13,7 +13,9 @@
     <string name="fjern_twist">Fjern Twist</string>
     <string name="legg_til_bilde">Legg til bilde</string>
     <string name="bilde">Bilde</string>
-    <string name="bildetittel">Bildetittel</string>
+    <string name="bildetittel">Legg til en bildetittel her</string>
     <string name="galleri">Galleri</string>
     <string name="kamera">Kamera</string>
+    <string name="tilbake">Tilbake</string>
+    <string name="lagre">Lagre</string>
 </resources>
