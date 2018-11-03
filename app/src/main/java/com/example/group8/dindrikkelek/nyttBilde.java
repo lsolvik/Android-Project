@@ -1,6 +1,8 @@
 package com.example.group8.dindrikkelek;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -13,11 +15,14 @@ import android.widget.ImageView;
 
 import com.example.group8.dindrikkelek.R;
 
+import static android.app.Activity.RESULT_OK;
+
 public class nyttBilde extends Fragment implements View.OnClickListener {
     private static final int GALLERY_REQUEST_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 200;
     private ImageView selectedImageView;
     private EditText tittelEditText;
+    Uri imageUri;
 
     public nyttBilde() {
         // Required empty public constructor
@@ -28,6 +33,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nytt_bilde, container, false);
+
 
         this.selectedImageView = view.findViewById(R.id.valgtBilde);
         this.tittelEditText = view.findViewById(R.id.nyttBildeTittel);
@@ -46,6 +52,8 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         intent.setType("image/*");
         intent.setAction(intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Velg bilde"), GALLERY_REQUEST_CODE);
+
+
     }
 
     // metode for å åpne kameraet på telefonen
@@ -53,6 +61,20 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode,data);
+        if(resultCode == RESULT_OK && requestCode== CAMERA_REQUEST_CODE ) {
+            Bitmap bm = (Bitmap)data.getExtras().get("data");
+            selectedImageView.setImageBitmap(bm);
+
+        }
+        else if (resultCode == RESULT_OK && requestCode== GALLERY_REQUEST_CODE){
+            imageUri = data.getData();
+            selectedImageView.setImageURI(imageUri);
         }
     }
 
@@ -67,5 +89,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+
 
 }
