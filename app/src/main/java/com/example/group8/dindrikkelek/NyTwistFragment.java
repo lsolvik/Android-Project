@@ -23,6 +23,7 @@ public class NyTwistFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ny_twist, container, false);
+       // getFragmentManager().beginTransaction().replace(R.id.content_frame, getParentFragment()).addToBackStack("my_fragment").commit();
 
         myDbHandler = new dbHandler(getActivity());
         Button btnLagre = view.findViewById(R.id.LagreTwist);
