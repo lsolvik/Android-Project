@@ -23,7 +23,10 @@ public class EndreLeggTil extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_endre_legg_til, container, false);
 
         Button btnNyttBilde = view.findViewById(R.id.leggTilBilde);
+        Button btnLeggTilTwist = view.findViewById(R.id.leggTilTwist);
+
         btnNyttBilde.setOnClickListener(this);
+        btnLeggTilTwist.setOnClickListener(this);
 
         return view;
     }
@@ -34,6 +37,10 @@ public class EndreLeggTil extends Fragment implements View.OnClickListener {
             case R.id.leggTilBilde:
                 getFragmentManager().beginTransaction().replace(R.id.content_frame,
                         new nyttBilde()).commit();
+                break;
+            case R.id.leggTilTwist:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,
+                        new NyTwistFragment()).commit();
                 break;
         }
     }

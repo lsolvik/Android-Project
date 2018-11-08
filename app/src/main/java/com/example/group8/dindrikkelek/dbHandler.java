@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class dbHandler extends SQLiteOpenHelper {
 
+    private static final String TAG = "dbHandler";
     private static final String DB_NAME = "dinDrikkeLek.db";
     private static final int DB_VERSION = 1;
 
@@ -57,7 +59,24 @@ public class dbHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void test() {
-    }
+    //test
+    //metode for å legge til lek gjennom nyTwist
+    //inserter i lek bare for å teste og
+    // fordi jeg ikke gidder å bry meg om foreign key i UTFALL tabellen
+    public boolean addData(String navn, String beskrivelse) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("LEKNAVN", navn);
+        cv.put("BESKRIVELSE", beskrivelse);
 
+        Log.d(TAG, "AddData: Adding " + navn + ", " + beskrivelse + " to LEK.");
+        long result = db.insert("LEK", null, cv);
+
+        //om data ble inserta feil, returnerer den -1/false
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
