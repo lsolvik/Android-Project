@@ -22,4 +22,7 @@
     <string name="lagreTwist">Lagre</string>
     <string name="legg_til_navn">Legg til navn</string>
     <string name="legg_til_beskrivelse">Legg til beskrivelse</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

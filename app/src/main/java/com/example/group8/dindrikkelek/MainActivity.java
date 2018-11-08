@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                new hovedside_frag()).commit();
+
         SQLiteOpenHelper dbhandler = new dbHandler(this);
         try {
             SQLiteDatabase db = dbhandler.getWritableDatabase();
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onCreateOptionsMenu(menu);
     }
 
-    
+
     //This method gets called when an
     //action on the app bar is clicked.
     @Override
