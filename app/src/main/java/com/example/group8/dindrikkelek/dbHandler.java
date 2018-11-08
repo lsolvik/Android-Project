@@ -2,9 +2,13 @@ package com.example.group8.dindrikkelek;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class dbHandler extends SQLiteOpenHelper {
 
@@ -44,6 +48,7 @@ public class dbHandler extends SQLiteOpenHelper {
 
     }
 
+    //hjelpemetode for metoden onCreate()
     private static void insertLek (SQLiteDatabase db, String navn, String beskrivelse) {
         ContentValues lekValues = new ContentValues();
         lekValues.put("LEKNAVN", navn);
@@ -63,14 +68,16 @@ public class dbHandler extends SQLiteOpenHelper {
     //metode for å legge til lek gjennom nyTwist
     //inserter i lek bare for å teste og
     // fordi jeg ikke gidder å bry meg om foreign key i UTFALL tabellen
-    public boolean addData(String navn, String beskrivelse) {
+    public boolean addData(String utfalltekst, int idLek) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("LEKNAVN", navn);
-        cv.put("BESKRIVELSE", beskrivelse);
+        cv.put("UTFALLTEKST", utfalltekst);
+        cv.put("idLEK_FK", idLek);
 
-        Log.d(TAG, "AddData: Adding " + navn + ", " + beskrivelse + " to LEK.");
-        long result = db.insert("LEK", null, cv);
+        //en log og db.insert for å legge til rad i tabellen UTFALL
+        Log.d(TAG, "AddData: Adding " + utfalltekst + ", " + idLek + " to LEK.");
+        long result = db.insert("UTFALL", null, cv);
+        db.close();
 
         //om data ble inserta feil, returnerer den -1/false
         if (result == -1) {
@@ -79,4 +86,35 @@ public class dbHandler extends SQLiteOpenHelper {
             return true;
         }
     }
+
+    //returnerer liste av leker
+    public List<String> getAllLeker(){
+        List<String> leker = new ArrayList<>();
+
+        String query = "SELECT * FROM LEK";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        //looper gjennom alle rader og legger dem til i lista
+        if (cursor.moveToFirst()) {
+            do {
+                leker.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return leker;
+    }
+
+    //returnerer data fra LEK og UTFALL
+    public Cursor getData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT UTFALLTEKST\n" +
+                "FROM LEK, UTFALL\n" +
+                "WHERE idLEK_PK = idLEK_FK;";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
 }

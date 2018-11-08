@@ -6,27 +6,30 @@
     tools:context=".NyTwistFragment"
     android:orientation="vertical">
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <EditText
         android:id="@+id/EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:hint="@string/legg_til_navn"
-        android:inputType="" />
-
-    <EditText
-        android:id="@+id/EditText1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:hint="@string/legg_til_beskrivelse"
-        android:inputType="" />
+        android:inputType=""
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/LagreTwist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/lagreTwist" />
+
+    <ListView
+        android:id="@+id/ListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>
