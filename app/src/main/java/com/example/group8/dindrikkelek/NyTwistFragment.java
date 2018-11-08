@@ -36,6 +36,7 @@ public class NyTwistFragment extends Fragment implements AdapterView.OnItemSelec
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ny_twist, container, false);
+       // getFragmentManager().beginTransaction().replace(R.id.content_frame, getParentFragment()).addToBackStack("my_fragment").commit();
 
         myDbHandler = new dbHandler(getActivity());
         spinner = view.findViewById(R.id.spinner);

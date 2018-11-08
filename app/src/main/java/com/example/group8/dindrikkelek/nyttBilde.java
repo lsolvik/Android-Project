@@ -1,7 +1,14 @@
 package com.example.group8.dindrikkelek;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.group8.dindrikkelek.R;
 
@@ -22,7 +30,11 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
     private static final int CAMERA_REQUEST_CODE = 200;
     private ImageView selectedImageView;
     private EditText tittelEditText;
+    byte byteArray[];
     Uri imageUri;
+    Context applicationContext = MainActivity.getContextOfApplication();
+
+
 
     public nyttBilde() {
         // Required empty public constructor
@@ -44,6 +56,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         kamera.setOnClickListener(this);
 
         return view;
+
     }
 
     // metode for å åpne galleriet på telefonen
@@ -70,13 +83,39 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         if(resultCode == RESULT_OK && requestCode== CAMERA_REQUEST_CODE ) {
             Bitmap bm = (Bitmap)data.getExtras().get("data");
             selectedImageView.setImageBitmap(bm);
+            Utility.getBytes(bm);
 
         }
         else if (resultCode == RESULT_OK && requestCode== GALLERY_REQUEST_CODE){
             imageUri = data.getData();
             selectedImageView.setImageURI(imageUri);
+            Bitmap bitmap = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
+            byte byteArray[] = Utility.getBytes(bitmap);
+
+
+
+
+
         }
     }
+
+
+
+
+public void addEntry(byte[] image) throws SQLException{
+    SQLiteOpenHelper dbhandler = new dbHandler(getActivity());
+    SQLiteDatabase db = dbhandler.getWritableDatabase();
+    
+    dbhandler.onCreate(db);
+    ContentValues cv = new ContentValues();
+    cv.put("idLEK_PK", 1);
+    cv.put("FILNAVN", "MORDI");
+    cv.put("BILDEBIT", image);
+    cv.put("BILDEBESKRIVELSE", "null");
+    db.insert("BILDE", null, cv);
+
+}
+
 
     public void onClick(View view) {
         switch (view.getId()) {
@@ -87,6 +126,15 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
             case R.id.kamera:
                 openCamera();
                 break;
+
+            case R.id.lagre:
+                addEntry(byteArray);
+
+
+
+
+
+
         }
     }
 

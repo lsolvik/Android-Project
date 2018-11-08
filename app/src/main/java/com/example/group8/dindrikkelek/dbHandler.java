@@ -86,35 +86,4 @@ public class dbHandler extends SQLiteOpenHelper {
             return true;
         }
     }
-
-    //returnerer liste av leker
-    public List<String> getAllLeker(){
-        List<String> leker = new ArrayList<>();
-
-        String query = "SELECT * FROM LEK";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        //looper gjennom alle rader og legger dem til i lista
-        if (cursor.moveToFirst()) {
-            do {
-                leker.add(cursor.getString(1));
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-        return leker;
-    }
-
-    //returnerer data fra LEK og UTFALL
-    public Cursor getData() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT UTFALLTEKST\n" +
-                "FROM LEK, UTFALL\n" +
-                "WHERE idLEK_PK = idLEK_FK;";
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
-
 }

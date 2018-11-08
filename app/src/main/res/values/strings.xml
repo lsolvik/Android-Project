@@ -20,5 +20,6 @@
     <string name="lagre">Lagre</string>
 
     <string name="lagreTwist">Lagre</string>
-    <string name="legg_til_navn">Legg til en utfalltekst</string>
+    <string name="legg_til_navn">Legg til navn</string>
+    <string name="legg_til_beskrivelse">Legg til beskrivelse</string>
 </resources>
