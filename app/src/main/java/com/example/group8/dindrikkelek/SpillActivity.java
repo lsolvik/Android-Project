@@ -26,7 +26,7 @@ public class SpillActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spill);
         myDbHandler = new dbHandler(this);
         myDbHandler.getAllLeker();
-        myDbHandler.dropUtfall();
+        //myDbHandler.dropUtfall();
       //  myDbHandler.lagUtfall();
         // View spillc = findViewById(R.id.spill_content);
 
@@ -69,7 +69,7 @@ public class SpillActivity extends AppCompatActivity {
         List<String> leker2 = myDbHandler.getLekerFK();
         String output = leker2.toString();
         getUtfall(leker2.get(0));
-        t.setText(output);
+       // t.setText(output);
 
 
 
