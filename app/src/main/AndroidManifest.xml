@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SpillActivity"></activity>
+        <activity android:name=".SpillActivity"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
