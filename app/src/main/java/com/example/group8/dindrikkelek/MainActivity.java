@@ -102,6 +102,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navn_spill:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
                         new hovedside_frag()).commit();
+            case R.id.nav_help:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                        new hjelpFragment()).commit();
 
         }
         drawerLayout.closeDrawer(GravityCompat.START);

@@ -12,40 +12,18 @@
         android:layout_width="175dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="235dp"
         android:text="@string/legg_til_twist"
-        app:layout_constraintEnd_toStartOf="@+id/endreTwist"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/endreTwist"
-        android:layout_width="175dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/endre_twist"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/leggTilTwist"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/fjernTwist"
-        android:layout_width="175dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:text="@string/fjern_twist"
-        app:layout_constraintEnd_toStartOf="@+id/leggTilBilde"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leggTilTwist" />
 
     <Button
         android:id="@+id/leggTilBilde"
         android:layout_width="175dp"
         android:layout_height="70dp"
+        android:layout_marginTop="235dp"
         android:layout_marginEnd="16dp"
         android:text="@string/legg_til_bilde"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fjernTwist"
-        app:layout_constraintTop_toBottomOf="@+id/endreTwist" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

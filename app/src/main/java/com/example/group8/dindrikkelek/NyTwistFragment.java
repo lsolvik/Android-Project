@@ -1,8 +1,11 @@
 package com.example.group8.dindrikkelek;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +29,7 @@ public class NyTwistFragment extends Fragment implements AdapterView.OnItemSelec
     dbHandler myDbHandler;
     Spinner spinner;
     ListView listview;
+    AlertDialog.Builder build;
 
     public NyTwistFragment() {
         // Required empty public constructor
@@ -38,9 +42,11 @@ public class NyTwistFragment extends Fragment implements AdapterView.OnItemSelec
         View view = inflater.inflate(R.layout.fragment_ny_twist, container, false);
 
         myDbHandler = new dbHandler(getActivity());
+
         spinner = view.findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         loadSpinnerData();
+
         final EditText EditText = view.findViewById(R.id.EditText);
         Button btnLagre = view.findViewById(R.id.LagreTwist);
 
@@ -72,12 +78,35 @@ public class NyTwistFragment extends Fragment implements AdapterView.OnItemSelec
             }
         });
 
-        //TEST
+        //Lytter for delete
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                
-                return false;
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, final long id) {
+
+                //invoke dialogvindu
+                build = new AlertDialog.Builder(getActivity());
+                build.setTitle("Slett utfall");
+                build.setMessage("Bekreft for å slette følgende utfall:\n\n'" + listview.getItemAtPosition(position) + "'");
+
+
+                //Dialogknapp for sletting
+                build.setNegativeButton("Slett", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SQLiteDatabase db = new dbHandler(getActivity()).getWritableDatabase();
+
+                        db.execSQL("DELETE FROM UTFALL WHERE UTFALLTEKST = '" + listview.getItemAtPosition(position) + "'");
+
+                        db.close();
+                        dialog.cancel();
+                        loadListViewData();
+                    }
+                }); //end DELETE
+
+                AlertDialog alert = build.create();
+                alert.show();
+
+                return true;
             }
         });//end setOnItemLongClickListener
 
