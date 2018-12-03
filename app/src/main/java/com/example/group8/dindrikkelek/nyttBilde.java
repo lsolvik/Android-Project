@@ -2,6 +2,7 @@ package com.example.group8.dindrikkelek;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -19,9 +20,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.group8.dindrikkelek.R;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -31,6 +39,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
     private ImageView selectedImageView;
     private EditText tittelEditText;
     byte byteArray[];
+    dbHandler Mydbhandler;
     Uri imageUri;
     Context applicationContext = MainActivity.getContextOfApplication();
 
@@ -77,41 +86,88 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         }
     }
 
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode,data);
         if(resultCode == RESULT_OK && requestCode== CAMERA_REQUEST_CODE ) {
-            Bitmap bm = (Bitmap)data.getExtras().get("data");
-            selectedImageView.setImageBitmap(bm);
-            Utility.getBytes(bm);
+            Bitmap img = (Bitmap)data.getExtras().get("data");
+
+
+            selectedImageView.setImageBitmap(img);
+            byte[] photo = Utility.getBytes(img);
+            String beskrivelse = "dsfsdf";
+            setBit(img);
+            //Mydbhandler.insertImg(photo, beskrivelse);
+
 
         }
         else if (resultCode == RESULT_OK && requestCode== GALLERY_REQUEST_CODE){
             imageUri = data.getData();
             selectedImageView.setImageURI(imageUri);
             Bitmap bitmap = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
-            byte byteArray[] = Utility.getBytes(bitmap);
+           // byte[] photo = Utility.getBytes(bitmap);
+
+
 
 
 
 
 
         }
+
+
+
     }
 
 
 
+    ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
 
-public void addEntry(byte[] image) throws SQLException{
-    SQLiteOpenHelper dbhandler = new dbHandler(getActivity());
-    SQLiteDatabase db = dbhandler.getWritableDatabase();
-    dbhandler.onCreate(db);
-    ContentValues cv = new ContentValues();
-    cv.put("idLEK_PK", 1);
-    cv.put("FILNAVN", "MORDI");
-    cv.put("BILDEBIT", image);
-    cv.put("BILDEBESKRIVELSE", "null");
-    db.insert("BILDE", null, cv);
+    public List<Bitmap> setBit(Bitmap bitmap){
+        bitmapArray.add(bitmap);
+        return bitmapArray;
+    }
+
+    public Bitmap getbit(){
+        Bitmap b = bitmapArray.get(0);
+        return b;
+    }
+
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory, "sdfsdf.jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
+
+
+public void addEntry() {
+
+
+    String filID = Mydbhandler.addBildeRef();
+    ImageView v = getView().findViewById(R.id.valgtBilde);
+    BitmapDrawable drawable = (BitmapDrawable) v.getDrawable();
+    Bitmap bitmapImage = drawable.getBitmap();
+    saveToInternalStorage(bitmapImage);
 
 }
 
@@ -127,16 +183,13 @@ public void addEntry(byte[] image) throws SQLException{
                 break;
 
             case R.id.lagre:
-                addEntry(byteArray);
-
-
-
-
+                addEntry();
+                break;
 
 
         }
-    }
 
+    }
 
 
 }
