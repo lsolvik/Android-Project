@@ -69,6 +69,19 @@ public class dbHandler extends SQLiteOpenHelper {
         db.insert("Utfall", null, utfallValues);
     }
 
+    public void lagUtfall(){
+        SQLiteDatabase db = getWritableDatabase();
+        insertUtfall(db, "Må ta tre shots", 2);
+        insertUtfall(db, "Pek på personen med størst nese", 5);
+    }
+
+    public void dropUtfall(){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS LEK");
+        db.execSQL("DROP TABLE IF EXISTS BILDE");
+        db.execSQL("DROP TABLE IF EXISTS UTFALL");
+        onCreate(db);
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -253,12 +266,6 @@ public class dbHandler extends SQLiteOpenHelper {
         return data;
     }
 
-    public void dropUtfall(){
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS LEK");
-        db.execSQL("DROP TABLE IF EXISTS BILDE");
-        db.execSQL("DROP TABLE IF EXISTS UTFALL");
-        onCreate(db);
-    }
+
 
 }
