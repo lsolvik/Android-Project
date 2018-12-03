@@ -72,7 +72,17 @@ public class NyTwistFragment extends Fragment implements AdapterView.OnItemSelec
             }
         });
 
+        //TEST
+        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                
+                return false;
+            }
+        });//end setOnItemLongClickListener
+
         return view;
+
     }
 
     //metode for å laste inn data fra LEK tabellen til spinneren
@@ -130,5 +140,7 @@ public class NyTwistFragment extends Fragment implements AdapterView.OnItemSelec
         ListAdapter adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listData);
         listview.setAdapter(adapter);
     }
+
+
 
 }

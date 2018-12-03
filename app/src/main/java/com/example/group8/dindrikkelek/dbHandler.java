@@ -184,7 +184,6 @@ public class dbHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return leker;
-
     }
 
 /*
