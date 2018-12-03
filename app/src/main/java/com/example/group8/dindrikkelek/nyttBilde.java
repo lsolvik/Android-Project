@@ -105,7 +105,6 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 public void addEntry(byte[] image) throws SQLException{
     SQLiteOpenHelper dbhandler = new dbHandler(getActivity());
     SQLiteDatabase db = dbhandler.getWritableDatabase();
-    
     dbhandler.onCreate(db);
     ContentValues cv = new ContentValues();
     cv.put("idLEK_PK", 1);

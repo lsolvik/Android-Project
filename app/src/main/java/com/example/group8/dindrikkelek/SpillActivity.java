@@ -37,8 +37,11 @@ public class SpillActivity extends AppCompatActivity {
     public void onClickShuffle(View view) {
 
         TextView t = findViewById(R.id.text_info);
+        myDbHandler.dropUtfall();
         t.setText("");
         getLeker();
+
+
 
 
 
@@ -63,13 +66,13 @@ public class SpillActivity extends AppCompatActivity {
 
     public void getLeker() {
         String lekid = getRandomLekID();
-        TextView t = findViewById(R.id.text_info);
+        //TextView t = findViewById(R.id.text_info);
         //   t.setText(randomLek);
         myDbHandler.setLekerFK(lekid);
         List<String> leker2 = myDbHandler.getLekerFK();
         String output = leker2.toString();
         getUtfall(leker2.get(0));
-       // t.setText(output);
+        //t.setText(output);
 
 
 
