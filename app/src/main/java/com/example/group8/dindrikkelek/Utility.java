@@ -12,6 +12,8 @@ public class Utility {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
             return stream.toByteArray();
+
+
         }
 
         // convert from byte array to bitmap

@@ -5,10 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.graphics.Bitmap;
 import android.util.Log;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class dbHandler extends SQLiteOpenHelper {
 
@@ -29,7 +33,7 @@ public class dbHandler extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE IF NOT EXISTS BILDE ("
                 + "idBILDE_PK INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "FILNAVN TEXT NOT NULL, "
+                + "FILNAVN TEXT, "
                 + "BILDEBESKRIVELSE TEXT);");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS UTFALL ("
@@ -113,6 +117,32 @@ public class dbHandler extends SQLiteOpenHelper {
             return true;
         }
     }
+    public String addBildeRef(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        List<String> returIDArr = new ArrayList<>();
+
+        byte[] array = new byte[7]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+
+        cv.put("Filnavn", generatedString);
+        db.insert("Bilde", null, cv);
+        String query = ("SELECT idBILDE_PK from Bilde WHERE Filnavn = " + generatedString);
+        Cursor cursor = db.rawQuery(query, null);
+
+        //looper gjennom alle rader og legger dem til i lista
+        if (cursor.moveToFirst()) {
+            do {
+                returIDArr.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+        String returID = returIDArr.get(1);
+        String r = "heisann";
+        return returID;
+    }
+
+
 
     //returnerer liste av leker
     public List<String> getAllLeker(){
@@ -267,5 +297,7 @@ public class dbHandler extends SQLiteOpenHelper {
     }
 
 
-
 }
+
+
+
