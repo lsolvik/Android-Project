@@ -1,14 +1,8 @@
 package com.example.group8.dindrikkelek;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,16 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.group8.dindrikkelek.R;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.InputStream;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -38,12 +25,6 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
     private static final int CAMERA_REQUEST_CODE = 200;
     private ImageView selectedImageView;
     private EditText tittelEditText;
-    byte byteArray[];
-    dbHandler Mydbhandler;
-    Uri imageUri;
-    Context applicationContext = MainActivity.getContextOfApplication();
-
-
 
     public nyttBilde() {
         // Required empty public constructor
@@ -55,19 +36,19 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nytt_bilde, container, false);
 
-
         this.selectedImageView = view.findViewById(R.id.valgtBilde);
         this.tittelEditText = view.findViewById(R.id.nyttBildeTittel);
         Button galleri = view.findViewById(R.id.galleri);
         Button kamera = view.findViewById(R.id.kamera);
         Button lagre = view.findViewById(R.id.lagre);
+        Button tilbake = view.findViewById(R.id.tilbake);
 
         galleri.setOnClickListener(this);
         kamera.setOnClickListener(this);
         lagre.setOnClickListener(this);
+        tilbake.setOnClickListener(this);
 
         return view;
-
     }
 
     // metode for å åpne galleriet på telefonen
@@ -76,8 +57,6 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         intent.setType("image/*");
         intent.setAction(intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Velg bilde"), GALLERY_REQUEST_CODE);
-
-
     }
 
     // metode for å åpne kameraet på telefonen
@@ -88,102 +67,43 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         }
     }
 
+    //tar et image som bitmap og nytt bildeobjekt med tittel
+    public void lagreBilde() {
+        Bitmap image = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
+        boolean test = new dbHandler(getActivity()).addBilde(new Bilde(tittelEditText.getText().toString(), image));
 
+        if(test) {
+            toastMessage("Bilde lagt til!");
+        } else {
+            toastMessage("Noe gikk galt.");
+        }
+
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode,data);
-        if(resultCode == RESULT_OK && requestCode== CAMERA_REQUEST_CODE ) {
-            Bitmap img = (Bitmap)data.getExtras().get("data");
+        if(resultCode == RESULT_OK && requestCode== GALLERY_REQUEST_CODE ) {
 
-
-            selectedImageView.setImageBitmap(img);
-            byte[] photo = Utility.getBytes(img);
-            String beskrivelse = "dsfsdf";
-            setBit(img);
-            //Mydbhandler.insertImg(photo, beskrivelse);
-
-
+            try {
+                Uri selectedImage = data.getData();
+                InputStream imageStream = getActivity().getContentResolver().openInputStream(selectedImage);
+                selectedImageView.setImageBitmap(BitmapFactory.decodeStream(imageStream));
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
         }
-        else if (resultCode == RESULT_OK && requestCode== GALLERY_REQUEST_CODE){
+
+        if (resultCode == RESULT_OK && requestCode== CAMERA_REQUEST_CODE){
             Bundle extras = data.getExtras();
             Bitmap image = (Bitmap)extras.get("data");
             selectedImageView.setImageBitmap(image);
-
-            /*
-            imageUri = data.getData();
-            selectedImageView.setImageURI(imageUri);
-            Bitmap bitmap = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
-           // byte[] photo = Utility.getBytes(bitmap);
-            */
-
-
-
-
-
-
-
-
         }
-
-
-
     }
 
-
-
-    ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
-
-    public List<Bitmap> setBit(Bitmap bitmap){
-        bitmapArray.add(bitmap);
-        return bitmapArray;
-    }
-
-    public Bitmap getbit(){
-        Bitmap b = bitmapArray.get(0);
-        return b;
-    }
-
-    private String saveToInternalStorage(Bitmap bitmapImage){
-        ContextWrapper cw = new ContextWrapper(getContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath=new File(directory, "sdfsdf.jpg");
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return directory.getAbsolutePath();
-    }
-
-
-    public void addEntry() {
-
-
-    String filID = Mydbhandler.addBildeRef();
-    ImageView v = getView().findViewById(R.id.valgtBilde);
-    BitmapDrawable drawable = (BitmapDrawable) v.getDrawable();
-    Bitmap bitmapImage = drawable.getBitmap();
-    saveToInternalStorage(bitmapImage);
-
-    }
-
-    //tar et image som bitmap og nytt bildeobjekt med tittel
-    public void lagreBilde() {
-        Bitmap image = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
-        new dbHandler(getContext()).addBilde(new Bilde(tittelEditText.getText().toString(), image));
+    //hjelpemetode for lagreBilde()
+    private void toastMessage(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
 
     public void onClick(View view) {
@@ -199,6 +119,9 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
             case R.id.lagre:
                 lagreBilde();
                 break;
+            case R.id.tilbake:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,
+                        new hovedside_frag()).commit();
         }
     }
 }
