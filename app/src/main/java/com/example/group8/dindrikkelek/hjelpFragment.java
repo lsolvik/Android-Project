@@ -22,6 +22,7 @@ public class hjelpFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hjelp, container, false);
 
+        /*
         TextView qna = view.findViewById(R.id.txtFaQ);
 
         qna.setText("Q: Hva er Dindrikkelek?\n" +
@@ -30,7 +31,7 @@ public class hjelpFragment extends Fragment {
                 "Q: Hva slags leker består appen av?\n" +
                 "A: Appen består av en pekelek, 'Jeg har aldri..', og 'Personen som..'." +
                 "Q: Hva er en Twist og hvordan legger jeg til en Twist?");
-
+*/
         return view;
     }
 

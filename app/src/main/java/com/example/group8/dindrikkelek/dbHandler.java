@@ -32,7 +32,7 @@ public class dbHandler extends SQLiteOpenHelper {
                 + "BESKRIVELSE TEXT NOT NULL);");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS BILDE ("
-                + "idBILDE_PK INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "FILNAVN TEXT, "
                 + "BILDEBESKRIVELSE TEXT);");
 
@@ -42,7 +42,7 @@ public class dbHandler extends SQLiteOpenHelper {
                 + "idLEK_FK INTEGER NOT NULL, "
                 + "idBILDE_FK INTEGER, "
                 + "FOREIGN KEY (idLEK_FK) REFERENCES LEK (idLEK_PK), "
-                + "FOREIGN KEY (idBILDE_FK) REFERENCES BILDE (idBILDE_PK));");
+                + "FOREIGN KEY (idBILDE_FK) REFERENCES BILDE (_id));");
 
         insertLek(db, "Pekelek", "Pekeleken fungerer slik....");
         insertLek(db, "Shots", "Shots fungerer slik....");
@@ -293,6 +293,32 @@ public class dbHandler extends SQLiteOpenHelper {
                 "WHERE idLEK_PK = idLEK_FK;";
         Cursor data = db.rawQuery(query, null);
         return data;
+    }
+
+    //metode for å lese alle bilder. blir brukt i bildeGalleriActivity linje 21
+    //for å vise bildene i et gridview
+    public Cursor readAllBilder() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        return db.query(bildeBaseColumns.bildeEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
+
+    //metode som tar values fra klassen BaseColumns og klassen Bilde
+    //siste value putter filnavnet som en string isteden for bitmap
+    public boolean addBilde(Bilde bilde) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(bildeBaseColumns.bildeEntry.COLUMN_BILDEBESKRIVELSE, bilde.getBeskrivelse());
+        values.put(bildeBaseColumns.bildeEntry.COLUMN_FILNAVN, bilde.getImageAsString());
+
+        return db.insert(bildeBaseColumns.bildeEntry.TABLE_NAME, null, values) != -1;
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.group8.dindrikkelek;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -105,6 +106,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_help:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
                         new hjelpFragment()).commit();
+            case R.id.nav_bildegalleri:
+                Intent intent = new Intent(this, bildeGalleriActivity.class);
+                startActivity(intent);
 
         }
         drawerLayout.closeDrawer(GravityCompat.START);

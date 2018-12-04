@@ -60,9 +60,11 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         this.tittelEditText = view.findViewById(R.id.nyttBildeTittel);
         Button galleri = view.findViewById(R.id.galleri);
         Button kamera = view.findViewById(R.id.kamera);
+        Button lagre = view.findViewById(R.id.lagre);
 
         galleri.setOnClickListener(this);
         kamera.setOnClickListener(this);
+        lagre.setOnClickListener(this);
 
         return view;
 
@@ -104,10 +106,17 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
         }
         else if (resultCode == RESULT_OK && requestCode== GALLERY_REQUEST_CODE){
+            Bundle extras = data.getExtras();
+            Bitmap image = (Bitmap)extras.get("data");
+            selectedImageView.setImageBitmap(image);
+
+            /*
             imageUri = data.getData();
             selectedImageView.setImageURI(imageUri);
             Bitmap bitmap = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
            // byte[] photo = Utility.getBytes(bitmap);
+            */
+
 
 
 
@@ -160,7 +169,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
     }
 
 
-public void addEntry() {
+    public void addEntry() {
 
 
     String filID = Mydbhandler.addBildeRef();
@@ -169,8 +178,13 @@ public void addEntry() {
     Bitmap bitmapImage = drawable.getBitmap();
     saveToInternalStorage(bitmapImage);
 
-}
+    }
 
+    //tar et image som bitmap og nytt bildeobjekt med tittel
+    public void lagreBilde() {
+        Bitmap image = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
+        new dbHandler(getContext()).addBilde(new Bilde(tittelEditText.getText().toString(), image));
+    }
 
     public void onClick(View view) {
         switch (view.getId()) {
@@ -183,13 +197,8 @@ public void addEntry() {
                 break;
 
             case R.id.lagre:
-                addEntry();
+                lagreBilde();
                 break;
-
-
         }
-
     }
-
-
 }
