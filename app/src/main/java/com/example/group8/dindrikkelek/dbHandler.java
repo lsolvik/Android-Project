@@ -32,7 +32,7 @@ public class dbHandler extends SQLiteOpenHelper {
                 + "BESKRIVELSE TEXT NOT NULL);");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS BILDE ("
-                + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "idBILDE_PK INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "FILNAVN TEXT, "
                 + "BILDEBESKRIVELSE TEXT);");
 
@@ -42,7 +42,7 @@ public class dbHandler extends SQLiteOpenHelper {
                 + "idLEK_FK INTEGER NOT NULL, "
                 + "idBILDE_FK INTEGER, "
                 + "FOREIGN KEY (idLEK_FK) REFERENCES LEK (idLEK_PK), "
-                + "FOREIGN KEY (idBILDE_FK) REFERENCES BILDE (_id));");
+                + "FOREIGN KEY (idBILDE_FK) REFERENCES BILDE (idBILDE_PK));");
 
         insertLek(db, "Pekelek", "Pekeleken fungerer slik....");
         insertLek(db, "Shots", "Shots fungerer slik....");
@@ -227,6 +227,7 @@ public class dbHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return leker;
+
     }
 
 /*
@@ -294,7 +295,6 @@ public class dbHandler extends SQLiteOpenHelper {
         Cursor data = db.rawQuery(query, null);
         return data;
     }
-
     //metode for å lese alle bilder. blir brukt i bildeGalleriActivity linje 21
     //for å vise bildene i et gridview
     public Cursor readAllBilder() {
@@ -327,6 +327,7 @@ public class dbHandler extends SQLiteOpenHelper {
         String query = "DELETE FROM UTFALL";
         db.execSQL(query);
     }
+
 }
 
 
