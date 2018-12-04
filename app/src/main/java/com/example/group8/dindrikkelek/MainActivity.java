@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
                 new hovedside_frag()).commit();
-        
+
     }
 
     //Implementing this method adds any items in
@@ -83,8 +83,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navn_spill:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
                         new hovedside_frag()).commit();
-            case R.id.nav_settings:
-                Intent intent = new Intent(this, Settings.class);
+            case R.id.nav_help:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                        new hjelpFragment()).commit();
+            case R.id.nav_bildegalleri:
+                Intent intent = new Intent(this, bildeGalleriActivity.class);
                 startActivity(intent);
 
         }

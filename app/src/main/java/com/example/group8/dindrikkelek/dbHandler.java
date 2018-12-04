@@ -327,7 +327,6 @@ public class dbHandler extends SQLiteOpenHelper {
         String query = "DELETE FROM UTFALL";
         db.execSQL(query);
     }
-
 }
 
 
