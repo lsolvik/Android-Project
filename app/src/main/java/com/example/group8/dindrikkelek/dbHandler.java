@@ -297,6 +297,12 @@ public class dbHandler extends SQLiteOpenHelper {
     }
 
 
+    public void deleteAllUtfall(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM UTFALL";
+        db.execSQL(query);
+    }
+
 }
 
 

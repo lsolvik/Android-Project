@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">dinDrikkeLek</string>
+    <string name="nav_spill">Play</string>
+    <string name="nav_Endreleker">Add/Delete Twists</string>
+    <string name="nav_bilder">Gallery</string>
+    <string name="nav_instillinger">Settings</string>
+    <string name="nav_help">Help</string>
+    <string name="nav_feedback">Feedback</string>
+    <string name="nav_support">Support</string>
+    <string name="toolbar_menu_hamburger">Menu</string>
+    <string name="legg_til_twist">Add Twist</string>
+    <string name="endre_twist">Edit Twist</string>
+    <string name="fjern_twist">Delete Twist</string>
+    <string name="legg_til_bilde">Add Picture</string>
+    <string name="bilde">Picture</string>
+    <string name="bildetittel">Picture Title</string>
+    <string name="galleri">Gallery</string>
+    <string name="kamera">Camera</string>
+    <string name="SpillLek">Play!</string>
+    <string name="tilbake">Back</string>
+    <string name="lagre">Save</string>
+    <string name="SpraakogInndata">Language and options</string>
+    <string name="TrykkForSpill">Press anywhere to start playing!</string>
+    <string name="lagreTwist">Save</string>
+    <string name="legg_til_navn">Add Name</string>
+    <string name="legg_til_beskrivelse">Add a description</string>
+    <string name="ConfirmedDelete">All twists are now deleted</string>
+</resources>

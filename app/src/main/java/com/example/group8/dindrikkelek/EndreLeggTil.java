@@ -1,7 +1,9 @@
 package com.example.group8.dindrikkelek;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +38,7 @@ public class EndreLeggTil extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.leggTilBilde:
                 getFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        new nyttBilde()).commit();
+                        new nyttBilde()).addToBackStack("EndreLeggTil").commit();
                 break;
             case R.id.leggTilTwist:
                 getFragmentManager().beginTransaction().replace(R.id.content_frame,
@@ -44,4 +46,6 @@ public class EndreLeggTil extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+
 }

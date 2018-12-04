@@ -36,9 +36,9 @@ public class SpillActivity extends AppCompatActivity {
     // @Override
     public void onClickShuffle(View view) {
 
-        TextView t = findViewById(R.id.text_info);
+      //  TextView t = findViewById(R.id.text_info);
         myDbHandler.dropUtfall();
-        t.setText("");
+        //t.setText("");
         getLeker();
 
 

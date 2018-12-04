@@ -1,12 +1,14 @@
 package com.example.group8.dindrikkelek;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -41,28 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
                 new hovedside_frag()).commit();
-
-        SQLiteOpenHelper dbhandler = new dbHandler(this);
-        try {
-            SQLiteDatabase db = dbhandler.getWritableDatabase();
-            //Code to read/write data from/to the database
-            Cursor cursor = db.query ("LEK",
-                    new String[] {"idLEK_PK", "LEKNAVN", "BESKRIVELSE"},
-                    null, null, null, null, null);
-
-            if (cursor != null && cursor.moveToFirst()) {
-                String navn = cursor.getString(1);
-                String beskrivelse = cursor.getString(2);
-                Toast t = Toast.makeText(this, navn + beskrivelse, Toast.LENGTH_LONG);
-
-                t.show();
-                cursor.close();
-                db.close();
-            }
-        } catch (SQLiteException e) {
-            Toast toast = Toast.makeText(this, "Database ikke tilgjengelig.", Toast.LENGTH_SHORT);
-            toast.show();
-        }
+        
     }
 
     //Implementing this method adds any items in
@@ -102,9 +83,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navn_spill:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
                         new hovedside_frag()).commit();
+            case R.id.nav_settings:
+                Intent intent = new Intent(this, Settings.class);
+                startActivity(intent);
 
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+    @Override
+    public void onBackPressed() {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+        if (f instanceof EndreLeggTil) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+        } else if (f instanceof NyTwistFragment) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                    new NyTwistFragment()).commit();
+
+        }  else if (f instanceof nyttBilde) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                    new NyTwistFragment()).commit();
+
+
+        }else {
+            super.onBackPressed();
+        }
+
+    }
+
 }
