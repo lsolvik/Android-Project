@@ -1,6 +1,5 @@
 package com.example.group8.dindrikkelek;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -10,6 +9,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,11 +18,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,19 +29,17 @@ import com.example.group8.dindrikkelek.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
-
-
 
 public class nyttBilde extends Fragment implements View.OnClickListener {
     private static final int GALLERY_REQUEST_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 200;
     private ImageView selectedImageView;
     private EditText tittelEditText;
-    Spinner spinner;
     byte byteArray[];
     dbHandler Mydbhandler;
     Uri imageUri;
@@ -67,12 +63,12 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         Button galleri = view.findViewById(R.id.galleri);
         Button kamera = view.findViewById(R.id.kamera);
         Button lagre = view.findViewById(R.id.lagre);
-        spinner = view.findViewById(R.id.spinner);
-        loadSpinnerData();
+        Button tilbake = view.findViewById(R.id.tilbake);
 
         galleri.setOnClickListener(this);
         kamera.setOnClickListener(this);
         lagre.setOnClickListener(this);
+        tilbake.setOnClickListener(this);
 
         return view;
 
@@ -96,76 +92,46 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         }
     }
 
+    //tar et image som bitmap og nytt bildeobjekt med tittel
+    public void lagreBilde() {
+        Bitmap image = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
+        boolean test = new dbHandler(getActivity()).addBilde(new Bilde(tittelEditText.getText().toString(), image));
 
+        if(test) {
+            toastMessage("Bilde lagt til!");
+        } else {
+            toastMessage("Noe gikk galt.");
+        }
+
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode,data);
-        if(resultCode == RESULT_OK && requestCode== CAMERA_REQUEST_CODE ) {
-            Bitmap img = (Bitmap)data.getExtras().get("data");
+        if(resultCode == RESULT_OK && requestCode== GALLERY_REQUEST_CODE ) {
 
-
-            selectedImageView.setImageBitmap(img);
-            byte[] photo = Utility.getBytes(img);
-            String beskrivelse = "dsfsdf";
-            //Mydbhandler.insertImg(photo, beskrivelse);
-
-
+            try {
+                Uri selectedImage = data.getData();
+                InputStream imageStream = getActivity().getContentResolver().openInputStream(selectedImage);
+                selectedImageView.setImageBitmap(BitmapFactory.decodeStream(imageStream));
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
         }
-        else if (resultCode == RESULT_OK && requestCode== GALLERY_REQUEST_CODE){
+
+        if (resultCode == RESULT_OK && requestCode== CAMERA_REQUEST_CODE){
             Bundle extras = data.getExtras();
-           // Bitmap image = (Bitmap)extras.get("data");
-           // selectedImageView.setImageBitmap(image);
-
-            imageUri = data.getData();
-            selectedImageView.setImageURI(imageUri);
-         //   Bitmap bitmap = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
-           // byte[] photo = Utility.getBytes(bitmap);
-
-
-
-
-
-
+            Bitmap image = (Bitmap)extras.get("data");
+            selectedImageView.setImageBitmap(image);
         }
-
-
-
     }
 
-    private void loadSpinnerData() {
-
-        dbHandler myDbHandler = new dbHandler(getActivity());
-
-        Cursor data = myDbHandler.getData();
-        ArrayList<String> listData = new ArrayList<>();
-        while (data.moveToNext()) {
-            listData.add(data.getString(0));
-        }
-
-        //adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.spinner_item, listData);
-
-        //knytter dataAdapter til spinner
-        spinner.setAdapter(dataAdapter);
+    //hjelpemetode for lagreBilde()
+    private void toastMessage(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
 
 
-
-
-    //tar et image som bitmap og nytt bildeobjekt med tittel
-    public void lagreBilde() {
-        Bitmap image = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
-        new dbHandler(getContext()).addBilde(new Bilde(tittelEditText.getText().toString(), image));
-
-        String Utfalltekst = spinner.getSelectedItem().toString();
-        String tittel = tittelEditText.getText().toString();
-
-         new dbHandler(getContext()).knyttBildetilUtfall(Utfalltekst, tittel);
-       // Toast t = Toast.makeText(getContext(), toasti, Toast.LENGTH_LONG);
-     //   t.show();
-    }
 
     public void onClick(View view) {
         switch (view.getId()) {
@@ -180,6 +146,9 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
             case R.id.lagre:
                 lagreBilde();
                 break;
+            case R.id.tilbake:
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,
+                        new hovedside_frag()).commit();
         }
     }
 }

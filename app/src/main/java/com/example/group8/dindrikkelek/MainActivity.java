@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_settings:
                 intent = new Intent(this, Settings.class);
                 startActivity(intent);
+                break;
 
         }
         drawerLayout.closeDrawer(GravityCompat.START);

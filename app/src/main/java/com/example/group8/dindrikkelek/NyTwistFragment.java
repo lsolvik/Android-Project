@@ -96,7 +96,7 @@ public class NyTwistFragment extends Fragment implements AdapterView.OnItemSelec
                         SQLiteDatabase db = new dbHandler(getActivity()).getWritableDatabase();
 
                         db.execSQL("DELETE FROM UTFALL WHERE UTFALLTEKST = '" + listview.getItemAtPosition(position) + "'");
-
+                        toastMessage("Twist slettet.");
                         db.close();
                         dialog.cancel();
                         loadListViewData();
@@ -147,7 +147,7 @@ public class NyTwistFragment extends Fragment implements AdapterView.OnItemSelec
         boolean insertData = myDbHandler.addData(utfallteksten, idLek);
 
         if (insertData) {
-            toastMessage("Data lagt til!");
+            toastMessage("Twist lagt til!");
         } else {
             toastMessage("Noe gikk galt.");
         }

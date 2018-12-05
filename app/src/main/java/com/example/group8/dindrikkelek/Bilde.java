@@ -9,11 +9,12 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 
 public class Bilde {
-    private String bildebeskrivelse;
-    private String image;
 
     private static final int PREFERRED_WIDTH = 250;
     private static final int PREFERRED_HEIGHT = 250;
+
+    private String bildebeskrivelse;
+    private String image;
 
     public static final int COL_ID = 0;
     public static final int COL_FILNAVN = 1;
@@ -66,7 +67,7 @@ public class Bilde {
         }
     }
 
-    //resizer bildet til en mindre størrelse
+    //resizer bildet til en foretrukket størrelse
     public Bitmap resizeBitmap(Bitmap bitmap) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
@@ -76,10 +77,9 @@ public class Bilde {
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
 
-        Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, false);
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
         //resizedBitmap.recycle();
 
         return resizedBitmap;
     }
-
 }
