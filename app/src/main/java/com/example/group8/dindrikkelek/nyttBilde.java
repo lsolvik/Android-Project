@@ -65,6 +65,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
         this.selectedImageView = view.findViewById(R.id.valgtBilde);
         this.tittelEditText = view.findViewById(R.id.nyttBildeTittel);
+
         Button galleri = view.findViewById(R.id.galleri);
         Button kamera = view.findViewById(R.id.kamera);
         Button lagre = view.findViewById(R.id.lagre);
@@ -72,11 +73,6 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         spinner = view.findViewById(R.id.spinner);
         loadSpinnerData();
 
-        if (savedInstanceState != null) {
-            img = savedInstanceState.getParcelable("Bitmapimage");
-            selectedImageView.setImageBitmap(img);
-
-        }
 
         galleri.setOnClickListener(this);
         kamera.setOnClickListener(this);
@@ -102,6 +98,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
+        if resultCo
         try {
             bitmap = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
             savedInstanceState.putParcelable("Bitmapimage", bitmap);
