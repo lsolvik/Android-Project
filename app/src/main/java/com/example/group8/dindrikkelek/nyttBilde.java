@@ -43,6 +43,8 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
     private ImageView selectedImageView;
     private EditText tittelEditText;
     Spinner spinner;
+    Bitmap bitmap;
+    Bitmap img;
     byte byteArray[];
     dbHandler Mydbhandler;
     Uri imageUri;
@@ -70,6 +72,12 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         spinner = view.findViewById(R.id.spinner);
         loadSpinnerData();
 
+        if (savedInstanceState != null) {
+            img = savedInstanceState.getParcelable("Bitmapimage");
+            selectedImageView.setImageBitmap(img);
+
+        }
+
         galleri.setOnClickListener(this);
         kamera.setOnClickListener(this);
         lagre.setOnClickListener(this);
@@ -78,6 +86,8 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         return view;
 
     }
+
+
 
     // metode for å åpne galleriet på telefonen
     public void openGallery () {
@@ -90,10 +100,18 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstance){
-        super.onSaveInstanceState(savedInstance);
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        try {
+            bitmap = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
+            savedInstanceState.putParcelable("Bitmapimage", bitmap);
+        } catch(Exception e) {
+            e.getMessage();
+        }
+
 
     }
+
 
     // metode for å åpne kameraet på telefonen
     public void openCamera() {
@@ -121,7 +139,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         // Toast t = Toast.makeText(getContext(), toasti, Toast.LENGTH_LONG);
         //   t.show();
     }
-
+/*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode,data);
@@ -144,6 +162,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
 
     }
+    */
 
     //hjelpemetode for lagreBilde()
     private void toastMessage(String message) {
