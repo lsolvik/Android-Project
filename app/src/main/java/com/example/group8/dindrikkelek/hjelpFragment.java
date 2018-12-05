@@ -28,10 +28,9 @@ public class hjelpFragment extends Fragment {
         qna.setText("Q: Hva er Dindrikkelek?\n" +
                 "A: Dindrikkelek er en egendefinert, letthjertet drikkelek rettet mot studenter og " +
                 "voksne!\n\n" +
-                "Q: Hva slags leker består appen av?\n" +
-                "A: Appen består av en pekelek, 'Jeg har aldri..', og 'Personen som..'." +
                 "Q: Hva er en Twist og hvordan legger jeg til en Twist?");
-*/
+        */
+
         return view;
     }
 

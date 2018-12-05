@@ -16,7 +16,8 @@
             android:id="@+id/list_item_image_view"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/drink_img" />
+            android:src="@drawable/drink_img"
+            android:contentDescription="Et bildeitem" />
 
         <TextView
             android:id="@+id/list_item_text_view"

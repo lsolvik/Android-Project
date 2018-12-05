@@ -97,7 +97,7 @@ public class dbHandler extends SQLiteOpenHelper {
     }
 
     //test
-    //metode for å legge til lek gjennom nyTwist
+    //metode for å legge til utfall gjennom nyTwist
     //inserter i lek bare for å teste og
     // fordi jeg ikke gidder å bry meg om foreign key i UTFALL tabellen
     public boolean addData(String utfalltekst, int idLek) {
