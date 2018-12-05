@@ -24,6 +24,13 @@
     <string name="TrykkForSpill">Press anywhere to start playing!</string>
     <string name="lagreTwist">Save</string>
     <string name="legg_til_navn">Add Name</string>
+    <string name="FAQTittel">FAQ</string>
     <string name="legg_til_beskrivelse">Add a description</string>
-    <string name="ConfirmedDelete">All twists are now deleted</string>
+    <string name="ConfirmedDelete">All twists are now deleted.</string>
+    <string name="ConfirmedDeleteBilder">All pictures are now deleted.</string>
+    <string name="leggTilLek">Add game</string>
+    <string name="faq_Q1">How does YourDrinkingGame work?</string>
+    <string name="faq_A1">YourDrinkingGame lets you make your own drinking games with your own Twists!</string>
+    <string name="faq_Q2">Whats a Twist?</string>
+    <string name="faq_A2">A Twist is whatever you want it to be. Its a tool for you to decide how a drinking game is supposed to work. </string>
 </resources>
