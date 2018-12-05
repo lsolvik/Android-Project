@@ -42,6 +42,8 @@ public class SpillActivity extends AppCompatActivity {
       //  TextView t = findViewById(R.id.text_info);
       //  myDbHandler.dropUtfall();
         //t.setText("");
+        selectedImageView = view.findViewById(R.id.bildeview);
+        selectedImageView.setImageDrawable(null);
         getLeker();
 
 
@@ -99,9 +101,10 @@ public class SpillActivity extends AppCompatActivity {
             UtfallTekst.setText(randomUtfall);
             String UtfallPK = myDbHandler.getUtfallPK(randomUtfall);
             String bilde = myDbHandler.checkBilde(UtfallPK);
-            String bildestring = myDbHandler.readBilde(bilde);
+
             if (bilde != null) {
                 try {
+                    String bildestring = myDbHandler.readBilde(bilde);
                     Toast t = Toast.makeText(this, "Denne har bilde", Toast.LENGTH_SHORT);
                     t.show();
                     selectedImageView = findViewById(R.id.bildeview);
@@ -113,7 +116,7 @@ public class SpillActivity extends AppCompatActivity {
                 }
 
                 break;
-            } else {
+            } else if (bilde == null) {
                 Toast t = Toast.makeText(this, "Denne har IKKE bilde", Toast.LENGTH_SHORT);
                 t.show();
                 break;
