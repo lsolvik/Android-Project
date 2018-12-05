@@ -43,6 +43,8 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
     private ImageView selectedImageView;
     private EditText tittelEditText;
     Spinner spinner;
+    Bitmap bitmap;
+    Bitmap img;
     byte byteArray[];
     dbHandler Mydbhandler;
     Uri imageUri;
@@ -63,12 +65,14 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
         this.selectedImageView = view.findViewById(R.id.valgtBilde);
         this.tittelEditText = view.findViewById(R.id.nyttBildeTittel);
+
         Button galleri = view.findViewById(R.id.galleri);
         Button kamera = view.findViewById(R.id.kamera);
         Button lagre = view.findViewById(R.id.lagre);
         Button tilbake = view.findViewById(R.id.tilbake);
         spinner = view.findViewById(R.id.spinner);
         loadSpinnerData();
+
 
         galleri.setOnClickListener(this);
         kamera.setOnClickListener(this);
@@ -79,6 +83,8 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
     }
 
+
+
     // metode for å åpne galleriet på telefonen
     public void openGallery () {
         Intent intent = new Intent();
@@ -88,12 +94,22 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
 
     }
-
+/*
     @Override
-    public void onSaveInstanceState(Bundle savedInstance){
-        super.onSaveInstanceState(savedInstance);
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        if resultCo
+        try {
+            bitmap = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
+            savedInstanceState.putParcelable("Bitmapimage", bitmap);
+        } catch(Exception e) {
+            e.getMessage();
+        }
+
 
     }
+    */
+
 
     // metode for å åpne kameraet på telefonen
     public void openCamera() {
@@ -144,6 +160,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
 
     }
+
 
     //hjelpemetode for lagreBilde()
     private void toastMessage(String message) {
