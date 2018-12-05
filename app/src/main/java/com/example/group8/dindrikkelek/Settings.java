@@ -62,8 +62,12 @@ public class Settings extends AppCompatActivity {
 
 
                         }
-                        else {
-
+                        else if (position == 0) {
+                            myDbHandler = new dbHandler((getApplicationContext()));
+                            myDbHandler.deleteAllBilder();
+                            String s = getResources().getString(R.string.ConfirmedDeleteBilder);
+                            Toast t = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
+                            t.show();
 
                         }
 
