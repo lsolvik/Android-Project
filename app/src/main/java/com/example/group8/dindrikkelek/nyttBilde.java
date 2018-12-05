@@ -18,9 +18,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
     private static final int CAMERA_REQUEST_CODE = 200;
     private ImageView selectedImageView;
     private EditText tittelEditText;
+    Spinner spinner;
     byte byteArray[];
     dbHandler Mydbhandler;
     Uri imageUri;
@@ -64,6 +67,8 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         Button kamera = view.findViewById(R.id.kamera);
         Button lagre = view.findViewById(R.id.lagre);
         Button tilbake = view.findViewById(R.id.tilbake);
+        spinner = view.findViewById(R.id.spinner);
+        loadSpinnerData();
 
         galleri.setOnClickListener(this);
         kamera.setOnClickListener(this);
@@ -103,6 +108,12 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
             toastMessage("Noe gikk galt.");
         }
 
+        String Utfalltekst = spinner.getSelectedItem().toString();
+        String tittel = tittelEditText.getText().toString();
+
+        new dbHandler(getContext()).knyttBildetilUtfall(Utfalltekst, tittel);
+        // Toast t = Toast.makeText(getContext(), toasti, Toast.LENGTH_LONG);
+        //   t.show();
     }
 
     @Override
@@ -118,12 +129,14 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
                 exception.printStackTrace();
             }
         }
+        else if(resultCode == RESULT_OK && requestCode== CAMERA_REQUEST_CODE ) {
+            Bitmap img = (Bitmap)data.getExtras().get("data");
+            selectedImageView.setImageBitmap(img);
+            byte[] photo = Utility.getBytes(img);
 
-        if (resultCode == RESULT_OK && requestCode== CAMERA_REQUEST_CODE){
-            Bundle extras = data.getExtras();
-            Bitmap image = (Bitmap)extras.get("data");
-            selectedImageView.setImageBitmap(image);
         }
+
+
     }
 
     //hjelpemetode for lagreBilde()
@@ -150,5 +163,23 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
                 getFragmentManager().beginTransaction().replace(R.id.content_frame,
                         new hovedside_frag()).commit();
         }
+    }
+
+    private void loadSpinnerData() {
+
+        dbHandler myDbHandler = new dbHandler(getActivity());
+
+        Cursor data = myDbHandler.getData();
+        ArrayList<String> listData = new ArrayList<>();
+        while (data.moveToNext()) {
+            listData.add(data.getString(0));
+        }
+
+        //adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.spinner_item, listData);
+
+        //knytter dataAdapter til spinner
+        spinner.setAdapter(dataAdapter);
     }
 }
