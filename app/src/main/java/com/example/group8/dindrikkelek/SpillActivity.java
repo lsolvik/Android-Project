@@ -57,12 +57,9 @@ public class SpillActivity extends AppCompatActivity {
         utfall = selectedTextView.getText().toString();
         try {
             bitmap = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
-            //imageuri = Uri.parse("android.resource://com.example.group8.dindrikkelek/" + (findViewById(R.id.bildeview)));
-            //  selectedImageView.setImageURI(null);
-
             savedInstanceState.putParcelable("Bitmapimage", bitmap);
         } catch(Exception e) {
-
+            e.getMessage();
         }
         savedInstanceState.putString("utfall", utfall);
 
@@ -137,8 +134,6 @@ public class SpillActivity extends AppCompatActivity {
             if (bilde != null) {
                 try {
                     String bildestring = myDbHandler.readBilde(bilde);
-                    Toast t = Toast.makeText(this, "Denne har bilde", Toast.LENGTH_SHORT);
-                    t.show();
                     selectedImageView = findViewById(R.id.bildeview);
                     Bitmap encodeByte = myBilde.stringToBitmap(bildestring);
                     selectedImageView.setImageBitmap(encodeByte);

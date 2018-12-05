@@ -45,7 +45,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="44dp"
                 android:layout_marginEnd="8dp"
-                android:text="Trykk hvor som helst på skjermen for å starte"
+                android:text="@string/TrykkHvorSomHelstSpill"
                 android:textAlignment="center"
                 android:textColor="@color/textcolor"
                 android:textSize="20sp"
