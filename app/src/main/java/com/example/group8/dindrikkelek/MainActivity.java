@@ -119,9 +119,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }  else if (f instanceof nyttBilde) {
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
                     new EndreLeggTil()).commit();
+        }else if (f instanceof nyLekFragment) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new EndreLeggTil()).commit();
+
+            }
 
 
-        }else {
+        else {
             super.onBackPressed();
         }
 

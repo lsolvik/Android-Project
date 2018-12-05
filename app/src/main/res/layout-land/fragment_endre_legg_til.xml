@@ -11,8 +11,8 @@
         android:id="@+id/leggTilTwist"
         android:layout_width="175dp"
         android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="116dp"
         android:text="@string/legg_til_twist"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,8 +21,8 @@
         android:id="@+id/leggTilBilde"
         android:layout_width="175dp"
         android:layout_height="70dp"
-        android:layout_marginTop="235dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/legg_til_bilde"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,11 +32,12 @@
         android:id="@+id/leggTilLek"
         android:layout_width="175dp"
         android:layout_height="70dp"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="104dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/leggTilLek"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leggTilTwist" />
+        app:layout_constraintEnd_toStartOf="@+id/leggTilBilde"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toEndOf="@+id/leggTilTwist"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
