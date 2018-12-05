@@ -89,6 +89,12 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstance){
+        super.onSaveInstanceState(savedInstance);
+
+    }
+
     // metode for å åpne kameraet på telefonen
     public void openCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

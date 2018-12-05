@@ -29,7 +29,6 @@
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:autofillHints="Bildetittel"
         android:inputType="text"
         android:text="@string/bildetittel"
         app:layout_constraintBottom_toTopOf="@+id/galleri"
@@ -47,6 +46,7 @@
         android:text="@string/galleri"
         app:layout_constraintBottom_toTopOf="@+id/kamera"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -55,7 +55,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="404dp"
+        android:layout_marginBottom="352dp"
         android:text="@string/kamera"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,11 +78,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="517dp">
+
 
     <Button
         android:id="@+id/tilbake"

@@ -15,10 +15,9 @@
         android:id="@+id/EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints=""
         android:hint="@string/legg_til_navn"
         android:inputType=""
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/LagreTwist"
