@@ -97,7 +97,7 @@ public class dbHandler extends SQLiteOpenHelper {
     }
 
     //test
-    //metode for å legge til lek gjennom nyTwist
+    //metode for å legge til utfall gjennom nyTwist
     //inserter i lek bare for å teste og
     // fordi jeg ikke gidder å bry meg om foreign key i UTFALL tabellen
     public boolean addData(String utfalltekst, int idLek) {
@@ -394,6 +394,25 @@ public class dbHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM UTFALL";
         db.execSQL(query);
+    }
+
+    public boolean addLek(String leknavn, String beskrivelse) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("LEKNAVN", leknavn);
+        cv.put("BESKRIVELSE", beskrivelse);
+
+        //en log og db.insert for å legge til rad i tabellen LEK
+        Log.d(TAG, "addLek: Adding " + leknavn + ", " + beskrivelse + " to LEK.");
+        long result = db.insert("LEK", null, cv);
+        db.close();
+
+        //om data ble inserta feil, returnerer den -1/false
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

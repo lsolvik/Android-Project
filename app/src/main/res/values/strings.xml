@@ -18,17 +18,12 @@
     <string name="kamera">Kamera</string>
     <string name="tilbake">Tilbake</string>
     <string name="lagre">Lagre</string>
-
     <string name="SpraakogInndata">Språk og inndata</string>
-
-
-
     <string name="lagreTwist">Lagre</string>
     <string name="legg_til_navn">Legg til navn</string>
     <string name="legg_til_beskrivelse">Legg til beskrivelse</string>
     <string name="SpillLek">Spill!</string>
-    <string name="txtFaQTitle">FAQ</string>
     <string name="ConfirmedDelete">Alle twister er nå slettet</string>
-
-
+    <string name="FAQTittel">FAQ</string>
+    <string name="leggTilLek">Legg til lek</string>
 </resources>

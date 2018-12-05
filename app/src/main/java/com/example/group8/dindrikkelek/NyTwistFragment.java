@@ -73,7 +73,7 @@ public class NyTwistFragment extends Fragment implements AdapterView.OnItemSelec
                     loadListViewData();
                     EditText.getText().clear();
                 } else {
-                    toastMessage("Du må legge til noe i tesktfeltet.");
+                    toastMessage("Du må fylle ut tekstfeltet.");
                 }
             }
         });
