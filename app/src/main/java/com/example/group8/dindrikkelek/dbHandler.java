@@ -125,7 +125,7 @@ public class dbHandler extends SQLiteOpenHelper {
         cv.put("LEKNAVN", leknavn);
         cv.put("BESKRIVELSE", beskrivelse);
 
-        //en log og db.insert for å legge til rad i tabellen UTFALL
+        //en log og db.insert for å legge til rad i tabellen LEK
         Log.d(TAG, "AddData: Adding " + leknavn + ", " + beskrivelse + " to LEK.");
         long result = db.insert("LEK", null, cv);
         db.close();
@@ -415,6 +415,13 @@ public class dbHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM UTFALL";
         db.execSQL(query);
+    }
+
+    public void deleteAllBilder(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM BILDE";
+        db.execSQL(query);
+
     }
 
 }

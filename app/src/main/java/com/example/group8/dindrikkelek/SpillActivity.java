@@ -5,6 +5,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,8 +22,13 @@ import java.util.Random;
 
 public class SpillActivity extends AppCompatActivity {
     public ImageView selectedImageView;
+    public TextView selectedTextView;
     dbHandler myDbHandler;
     Bilde myBilde;
+    Bitmap bitmap;
+    Bitmap img;
+    String utfall;
+    Uri imageuri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +37,30 @@ public class SpillActivity extends AppCompatActivity {
         myDbHandler = new dbHandler(this);
         myDbHandler.getAllLeker();
         //myDbHandler.dropUtfall();
-      //  myDbHandler.lagUtfall();
+        //  myDbHandler.lagUtfall();
         // View spillc = findViewById(R.id.spill_content);
+        if (savedInstanceState != null) {
+            img = savedInstanceState.getParcelable("Bitmapimage");
+            selectedImageView = findViewById(R.id.bildeview);
+            selectedTextView = findViewById(R.id.text_utfall);
+            selectedImageView.setImageBitmap(img);
+            String hei = savedInstanceState.getString("utfall");
+            selectedTextView.setText(hei);
 
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        selectedTextView = findViewById(R.id.text_utfall);
+        utfall = selectedTextView.getText().toString();
+        bitmap = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
+        //imageuri = Uri.parse("android.resource://com.example.group8.dindrikkelek/" + (findViewById(R.id.bildeview)));
+      //  selectedImageView.setImageURI(null);
+
+        savedInstanceState.putParcelable("Bitmapimage", bitmap);
+        savedInstanceState.putString("utfall", utfall);
 
     }
 

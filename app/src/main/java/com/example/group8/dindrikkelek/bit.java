@@ -17,9 +17,9 @@ public class bit {
     public void setIntent(Intent data){
         this.data = data;
     }
-    public Intent getData(){
-        return data;
+    //public Intent getData(){
+       // return data;
     }
 
 
-}
+//}

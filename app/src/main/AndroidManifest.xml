@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SpillActivity"
-            android:screenOrientation="portrait"></activity>
+         />
         <activity android:name=".Settings"
             android:label="@string/nav_instillinger"/>
         <activity android:name=".bildeGalleriActivity" />

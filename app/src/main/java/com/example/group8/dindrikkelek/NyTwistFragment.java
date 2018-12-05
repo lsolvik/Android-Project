@@ -133,7 +133,7 @@ public class NyTwistFragment extends Fragment implements AdapterView.OnItemSelec
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String lek = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), "Du valgte: " + lek, Toast.LENGTH_LONG).show();
+        Toast.makeText(parent.getContext(), "Du valgte: " + lek, Toast.LENGTH_SHORT).show();
     }
 
     //nødvendig metode at klassen skal implementere AdapterView.OnItemSelectedListener
