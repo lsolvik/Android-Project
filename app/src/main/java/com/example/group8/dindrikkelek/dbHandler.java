@@ -118,6 +118,27 @@ public class dbHandler extends SQLiteOpenHelper {
             return true;
         }
     }
+
+    public boolean addLek(String leknavn, String beskrivelse) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("LEKNAVN", leknavn);
+        cv.put("BESKRIVELSE", beskrivelse);
+
+        //en log og db.insert for å legge til rad i tabellen UTFALL
+        Log.d(TAG, "AddData: Adding " + leknavn + ", " + beskrivelse + " to LEK.");
+        long result = db.insert("LEK", null, cv);
+        db.close();
+
+        //om data ble inserta feil, returnerer den -1/false
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
     /*public String addBildeRef(){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
