@@ -34,7 +34,6 @@
         android:layout_marginBottom="8dp"
         android:text="@string/SpraakogInndata"
         android:textColor="#4DB6AC"
-        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
