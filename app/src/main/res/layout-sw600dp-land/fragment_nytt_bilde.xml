@@ -29,7 +29,7 @@
         android:layout_marginBottom="20dp"
         android:autofillHints="Bildetittel"
         android:inputType="text"
-        android:text="@string/bildetittel"
+        android:hint="Bildetittel"
         app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

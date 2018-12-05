@@ -18,8 +18,8 @@
         android:id="@+id/nyttBildeTittel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text="@string/bildetittel"
+        android:inputType=""
+        android:hint="Bildetittel"
      />
 
 
