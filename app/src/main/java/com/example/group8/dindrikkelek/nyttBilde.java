@@ -98,7 +98,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
 
     }
-
+/*
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
@@ -111,6 +111,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
 
     }
+    */
 
 
     // metode for å åpne kameraet på telefonen
@@ -139,7 +140,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         // Toast t = Toast.makeText(getContext(), toasti, Toast.LENGTH_LONG);
         //   t.show();
     }
-/*
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode,data);
@@ -162,7 +163,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
 
     }
-    */
+
 
     //hjelpemetode for lagreBilde()
     private void toastMessage(String message) {
