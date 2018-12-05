@@ -27,22 +27,23 @@ public class dbHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS LEK ("
-                + "idLEK_PK INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "idLEK_PK INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, "
                 + "LEKNAVN TEXT NOT NULL, "
                 + "BESKRIVELSE TEXT NOT NULL);");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS BILDE ("
-                + "idBILDE_PK INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, "
                 + "FILNAVN TEXT, "
                 + "BILDEBESKRIVELSE TEXT);");
 
+
         db.execSQL("CREATE TABLE IF NOT EXISTS UTFALL ("
-                + "idUTFALL_PK INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "idUTFALL_PK INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, "
                 + "UTFALLTEKST TEXT NOT NULL, "
                 + "idLEK_FK INTEGER NOT NULL, "
                 + "idBILDE_FK INTEGER, "
                 + "FOREIGN KEY (idLEK_FK) REFERENCES LEK (idLEK_PK), "
-                + "FOREIGN KEY (idBILDE_FK) REFERENCES BILDE (idBILDE_PK));");
+                + "FOREIGN KEY (idBILDE_FK) REFERENCES BILDE (_id));");
 
         insertLek(db, "Pekelek", "Pekeleken fungerer slik....");
         insertLek(db, "Shots", "Shots fungerer slik....");
@@ -117,7 +118,7 @@ public class dbHandler extends SQLiteOpenHelper {
             return true;
         }
     }
-    public String addBildeRef(){
+    /*public String addBildeRef(){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         List<String> returIDArr = new ArrayList<>();
@@ -141,6 +142,7 @@ public class dbHandler extends SQLiteOpenHelper {
         String r = "heisann";
         return returID;
     }
+    */
 
 
 
@@ -285,6 +287,33 @@ public class dbHandler extends SQLiteOpenHelper {
         return Utfall;
 
     }
+    public String getUtfallPK(String utfalltekst){
+        SQLiteDatabase db = getWritableDatabase();
+        List<String> rows = new ArrayList<>();
+        String fk;
+
+        String query = ("SELECT idUTFALL_PK FROM UTFALL WHERE UTFALLTEKST = '" + utfalltekst+"'");
+        Cursor data = db.rawQuery(query, null);
+        if (data.moveToFirst()) {
+            rows.add(data.getString(data.getColumnIndex("idUTFALL_PK")));
+        }
+        fk = rows.get(0);
+        return fk;
+    }
+
+    public String checkBilde(String UtfallPK){
+        SQLiteDatabase db = getWritableDatabase();
+        List<String> rows = new ArrayList<>();
+        String fk;
+
+        String query = ("SELECT idBILDE_FK FROM UTFALL WHERE idUTFALL_PK = '" + UtfallPK+"'");
+        Cursor data = db.rawQuery(query, null);
+        if (data.moveToFirst()) {
+            rows.add(data.getString(data.getColumnIndex("idBILDE_FK")));
+        }
+        fk = rows.get(0);
+        return fk;
+    }
 
     //returnerer data fra LEK og UTFALL
     public Cursor getData() {
@@ -307,19 +336,66 @@ public class dbHandler extends SQLiteOpenHelper {
                 null,
                 null,
                 null
+
         );
+
     }
 
+    public String readBilde(String arg) {
+        SQLiteDatabase db = getReadableDatabase();
+        List<String> rows = new ArrayList<>();
+        Cursor c = db.query(bildeBaseColumns.bildeEntry.TABLE_NAME,
+                null,
+                ("SELECT * FROM BILDE WHERE _id = '"+ arg +"'"),
+                null,
+                null,
+                null,
+                null
+
+        );
+        if (c.moveToFirst()) {
+            rows.add(c.getString(c.getColumnIndex("*")));
+        }
+        String rader = rows.get(0);
+        return rader;
+    }
     //metode som tar values fra klassen BaseColumns og klassen Bilde
     //siste value putter filnavnet som en string isteden for bitmap
     public boolean addBilde(Bilde bilde) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
+
+        //db.insert("UTFALL", null, values);
+        values = new ContentValues();
         values.put(bildeBaseColumns.bildeEntry.COLUMN_BILDEBESKRIVELSE, bilde.getBeskrivelse());
         values.put(bildeBaseColumns.bildeEntry.COLUMN_FILNAVN, bilde.getImageAsString());
 
+
         return db.insert(bildeBaseColumns.bildeEntry.TABLE_NAME, null, values) != -1;
     }
+    public void knyttBildetilUtfall(String utfalltekst, String tittel){
+        SQLiteDatabase db = getWritableDatabase();
+        String fk;
+        List<String> rows = new ArrayList<>();
+
+
+        String query = ("SELECT _id FROM BILDE WHERE BILDEBESKRIVELSE = '" + tittel+"'");
+        Cursor data = db.rawQuery(query, null);
+        if (data.moveToFirst()) {
+            rows.add(data.getString(data.getColumnIndex("_id")));
+        }
+        fk = rows.get(0);
+        query=null;
+
+        ContentValues cv = new ContentValues();
+        cv.put("idBILDE_FK", fk);
+        db.update("UTFALL", cv, "UTFALLTEKST = '"+utfalltekst +"'", null);
+        db.close();
+
+
+
+    }
+
 
 
     public void deleteAllUtfall(){

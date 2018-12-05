@@ -19,7 +19,7 @@ import android.widget.Toast;
 import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    dbHandler mydbhandler;
     public static Context contextOfApplication;
     public static Context getContextOfApplication()
     {
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         contextOfApplication = getApplicationContext();
+
 
         //ber activity om å bruke toolbar som sin app bar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-
+        final Intent intent;
         switch (menuItem.getItemId()) {
             case R.id.nav_endreleker:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
@@ -83,17 +84,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navn_spill:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
                         new hovedside_frag()).commit();
+                break;
             case R.id.nav_help:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
                         new hjelpFragment()).commit();
+                break;
             case R.id.nav_bildegalleri:
-                Intent intent = new Intent(this, bildeGalleriActivity.class);
+                intent = new Intent(this, bildeGalleriActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_settings:
+                intent = new Intent(this, Settings.class);
                 startActivity(intent);
 
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
     @Override
     public void onBackPressed() {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.content_frame);
@@ -103,11 +111,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (f instanceof NyTwistFragment) {
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                    new NyTwistFragment()).commit();
+                    new EndreLeggTil()).commit();
 
         }  else if (f instanceof nyttBilde) {
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                    new NyTwistFragment()).commit();
+                    new EndreLeggTil()).commit();
 
 
         }else {
@@ -115,5 +123,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
 
 }

@@ -4,9 +4,11 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,8 +19,9 @@ import java.util.List;
 import java.util.Random;
 
 public class SpillActivity extends AppCompatActivity {
-
+    public ImageView selectedImageView;
     dbHandler myDbHandler;
+    Bilde myBilde;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,7 @@ public class SpillActivity extends AppCompatActivity {
     public void onClickShuffle(View view) {
 
       //  TextView t = findViewById(R.id.text_info);
-        myDbHandler.dropUtfall();
+      //  myDbHandler.dropUtfall();
         //t.setText("");
         getLeker();
 
@@ -94,6 +97,23 @@ public class SpillActivity extends AppCompatActivity {
             String gammelverdi = randomUtfall;
             TextView UtfallTekst = findViewById(R.id.text_utfall);
             UtfallTekst.setText(randomUtfall);
+            String UtfallPK = myDbHandler.getUtfallPK(randomUtfall);
+            String bilde = myDbHandler.checkBilde(UtfallPK);
+           // String bildestring = myDbHandler.readBilde(bilde);
+            if (bilde != null) {
+                Toast t = Toast.makeText(this, "Denne har bilde", Toast.LENGTH_SHORT);
+                t.show();
+                selectedImageView = findViewById(R.id.bildeview);
+               // Bitmap encodeByte = myBilde.stringToBitmap(bildestring);
+               // selectedImageView.setImageBitmap(encodeByte);
+
+                break;
+            } else {
+                Toast t = Toast.makeText(this, "Denne har IKKE bilde", Toast.LENGTH_SHORT);
+                t.show();
+                break;
+            }
+
 
         }
 

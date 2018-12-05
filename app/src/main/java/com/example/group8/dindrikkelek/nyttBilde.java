@@ -1,5 +1,6 @@
 package com.example.group8.dindrikkelek;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -17,9 +18,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,11 +36,14 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
+
+
 public class nyttBilde extends Fragment implements View.OnClickListener {
     private static final int GALLERY_REQUEST_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 200;
     private ImageView selectedImageView;
     private EditText tittelEditText;
+    Spinner spinner;
     byte byteArray[];
     dbHandler Mydbhandler;
     Uri imageUri;
@@ -61,6 +67,8 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         Button galleri = view.findViewById(R.id.galleri);
         Button kamera = view.findViewById(R.id.kamera);
         Button lagre = view.findViewById(R.id.lagre);
+        spinner = view.findViewById(R.id.spinner);
+        loadSpinnerData();
 
         galleri.setOnClickListener(this);
         kamera.setOnClickListener(this);
@@ -100,24 +108,19 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
             selectedImageView.setImageBitmap(img);
             byte[] photo = Utility.getBytes(img);
             String beskrivelse = "dsfsdf";
-            setBit(img);
             //Mydbhandler.insertImg(photo, beskrivelse);
 
 
         }
         else if (resultCode == RESULT_OK && requestCode== GALLERY_REQUEST_CODE){
             Bundle extras = data.getExtras();
-            Bitmap image = (Bitmap)extras.get("data");
-            selectedImageView.setImageBitmap(image);
+           // Bitmap image = (Bitmap)extras.get("data");
+           // selectedImageView.setImageBitmap(image);
 
-            /*
             imageUri = data.getData();
             selectedImageView.setImageURI(imageUri);
-            Bitmap bitmap = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
+         //   Bitmap bitmap = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
            // byte[] photo = Utility.getBytes(bitmap);
-            */
-
-
 
 
 
@@ -130,60 +133,38 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
     }
 
+    private void loadSpinnerData() {
 
+        dbHandler myDbHandler = new dbHandler(getActivity());
 
-    ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
-
-    public List<Bitmap> setBit(Bitmap bitmap){
-        bitmapArray.add(bitmap);
-        return bitmapArray;
-    }
-
-    public Bitmap getbit(){
-        Bitmap b = bitmapArray.get(0);
-        return b;
-    }
-
-    private String saveToInternalStorage(Bitmap bitmapImage){
-        ContextWrapper cw = new ContextWrapper(getContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath=new File(directory, "sdfsdf.jpg");
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        Cursor data = myDbHandler.getData();
+        ArrayList<String> listData = new ArrayList<>();
+        while (data.moveToNext()) {
+            listData.add(data.getString(0));
         }
-        return directory.getAbsolutePath();
+
+        //adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.spinner_item, listData);
+
+        //knytter dataAdapter til spinner
+        spinner.setAdapter(dataAdapter);
     }
 
 
-    public void addEntry() {
 
-
-    String filID = Mydbhandler.addBildeRef();
-    ImageView v = getView().findViewById(R.id.valgtBilde);
-    BitmapDrawable drawable = (BitmapDrawable) v.getDrawable();
-    Bitmap bitmapImage = drawable.getBitmap();
-    saveToInternalStorage(bitmapImage);
-
-    }
 
     //tar et image som bitmap og nytt bildeobjekt med tittel
     public void lagreBilde() {
         Bitmap image = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
         new dbHandler(getContext()).addBilde(new Bilde(tittelEditText.getText().toString(), image));
+
+        String Utfalltekst = spinner.getSelectedItem().toString();
+        String tittel = tittelEditText.getText().toString();
+
+         new dbHandler(getContext()).knyttBildetilUtfall(Utfalltekst, tittel);
+       // Toast t = Toast.makeText(getContext(), toasti, Toast.LENGTH_LONG);
+     //   t.show();
     }
 
     public void onClick(View view) {
