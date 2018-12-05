@@ -57,7 +57,7 @@ public class Bilde {
     }
 
     //gjør det motsatte. tar en string og konverterer til bytearray ved bruk av Base64 library
-    private static Bitmap stringToBitmap(String encodedString) {
+    public static Bitmap stringToBitmap(String encodedString) {
         try {
             byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
             return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);

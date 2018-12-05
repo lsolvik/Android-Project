@@ -344,17 +344,9 @@ public class dbHandler extends SQLiteOpenHelper {
     public String readBilde(String arg) {
         SQLiteDatabase db = getReadableDatabase();
         List<String> rows = new ArrayList<>();
-        Cursor c = db.query(bildeBaseColumns.bildeEntry.TABLE_NAME,
-                null,
-                ("SELECT * FROM BILDE WHERE _id = '"+ arg +"'"),
-                null,
-                null,
-                null,
-                null
-
-        );
+        Cursor c = db.rawQuery("SELECT FILNAVN FROM BILDE WHERE _id = '"+ arg +"'", null);
         if (c.moveToFirst()) {
-            rows.add(c.getString(c.getColumnIndex("*")));
+            rows.add(c.getString(c.getColumnIndex("FILNAVN")));
         }
         String rader = rows.get(0);
         return rader;

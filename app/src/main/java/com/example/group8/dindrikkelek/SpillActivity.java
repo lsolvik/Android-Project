@@ -99,13 +99,18 @@ public class SpillActivity extends AppCompatActivity {
             UtfallTekst.setText(randomUtfall);
             String UtfallPK = myDbHandler.getUtfallPK(randomUtfall);
             String bilde = myDbHandler.checkBilde(UtfallPK);
-           // String bildestring = myDbHandler.readBilde(bilde);
+            String bildestring = myDbHandler.readBilde(bilde);
             if (bilde != null) {
-                Toast t = Toast.makeText(this, "Denne har bilde", Toast.LENGTH_SHORT);
-                t.show();
-                selectedImageView = findViewById(R.id.bildeview);
-               // Bitmap encodeByte = myBilde.stringToBitmap(bildestring);
-               // selectedImageView.setImageBitmap(encodeByte);
+                try {
+                    Toast t = Toast.makeText(this, "Denne har bilde", Toast.LENGTH_SHORT);
+                    t.show();
+                    selectedImageView = findViewById(R.id.bildeview);
+                    Bitmap encodeByte = myBilde.stringToBitmap(bildestring);
+                    selectedImageView.setImageBitmap(encodeByte);
+                } catch (Exception e) {
+                    e.getMessage();
+
+                }
 
                 break;
             } else {
