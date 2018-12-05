@@ -55,11 +55,15 @@ public class SpillActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         selectedTextView = findViewById(R.id.text_utfall);
         utfall = selectedTextView.getText().toString();
-        bitmap = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
-        //imageuri = Uri.parse("android.resource://com.example.group8.dindrikkelek/" + (findViewById(R.id.bildeview)));
-      //  selectedImageView.setImageURI(null);
+        try {
+            bitmap = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
+            //imageuri = Uri.parse("android.resource://com.example.group8.dindrikkelek/" + (findViewById(R.id.bildeview)));
+            //  selectedImageView.setImageURI(null);
 
-        savedInstanceState.putParcelable("Bitmapimage", bitmap);
+            savedInstanceState.putParcelable("Bitmapimage", bitmap);
+        } catch(Exception e) {
+
+        }
         savedInstanceState.putString("utfall", utfall);
 
     }
