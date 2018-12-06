@@ -191,7 +191,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tilbake:
                 getFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        new hovedside_frag()).commit();
+                        new EndreLeggTil()).commit();
         }
     }
 

@@ -39,4 +39,5 @@
     <string name="ErrorPic">Kan ikke lagre bilde. Kan hende det ikke finnes utfall/twist å knytte det til</string>
     <string name="PicAdded">Bilde lagret!</string>
     <string name="PickNotAdded">Bilde ble ikke lagret. Noe gikk galt</string>
+    <string name="BildeTittel">Bildetittel</string>
 </resources>

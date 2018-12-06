@@ -40,5 +40,6 @@
     <string name="ErrorPic">Cannot save image. Missing twist. Have you added any?</string>
     <string name="PicAdded">Image has been saved!</string>
     <string name="PickNotAdded">Something went wrong. Picture has not been saved</string>
+    <string name="BildeTittel">Title of image</string>
 
 </resources>
