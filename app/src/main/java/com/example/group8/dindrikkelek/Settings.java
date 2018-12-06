@@ -49,14 +49,14 @@ public class Settings extends AppCompatActivity {
                                             View itemView,
                                             int position,
                                             long id) {
-                        if (position == 2) {
+                        if (position == 3) {
                             Intent intent = new Intent(Settings.this,
                                     MainActivity.class);
                             startActivity(intent);
                         }else if (position ==1) {
                             myDbHandler = new dbHandler(getApplicationContext());
                             myDbHandler.deleteAllUtfall();
-                            String s = getResources().getString(R.string.ConfirmedDelete);
+                            String s = getResources().getString(R.string.ConfirmedDeleteTwists);
                             Toast t = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
                             t.show();
 
@@ -69,6 +69,12 @@ public class Settings extends AppCompatActivity {
                             Toast t = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
                             t.show();
 
+                        } else if(position ==2) {
+                            myDbHandler = new dbHandler((getApplicationContext()));
+                            myDbHandler.deleteAllLeker();
+                            String s = getResources().getString(R.string.ConfirmedDeleteLeker);
+                            Toast t = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
+                            t.show();
                         }
 
 

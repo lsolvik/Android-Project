@@ -33,4 +33,6 @@
     <string name="faq_A2">En Twist er hva enn du vil det skal være. Det er dine egne utfall ut ifra lekene i spillet. Ved å legge til twist, legger du til nye regler i spillene!  </string>
     <string name="TrykkHvorSomHelstSpill">Trykk hvor som helst på skjermen for å starte spillet! </string>
     <string name="DeleteInfo">For å slette en twist, velg utfall/twist fra lista og hold inne</string>
+    <string name="ConfirmedDeleteLeker">Alle leker er nå slettet</string>
+    <string name="ConfirmedDeleteTwists">Alle twister er nå slettet</string>
 </resources>

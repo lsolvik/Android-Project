@@ -34,4 +34,7 @@
     <string name="faq_A2">A Twist is whatever you want it to be. Its a result of your own rules to your own games. This way you can keep adding rules to your drinking games!. </string>
     <string name="TrykkHvorSomHelstSpill">Press anywhere at the screen to start playing!</string>
     <string name="DeleteInfo">To delete a twist, select a twist from the list and hold it for two seconds</string>
+    <string name="ConfirmedDeleteLeker">All games are now deleted</string>
+    <string name="ConfirmedDeleteTwists">All twists are now deleted</string>
+
 </resources>
