@@ -45,16 +45,43 @@ public class dbHandler extends SQLiteOpenHelper {
                 + "FOREIGN KEY (idLEK_FK) REFERENCES LEK (idLEK_PK), "
                 + "FOREIGN KEY (idBILDE_FK) REFERENCES BILDE (_id));");
 
+        //testdata. beskrivelsetekst er kun placeholder/eksempler
         insertLek(db, "Pekelek", "Pekeleken fungerer slik....");
-        insertLek(db, "Shots", "Shots fungerer slik....");
         insertLek(db, "Jeg har aldri", "Jeg har aldri fungerer slik....");
         insertLek(db, "Personen som", "Personen som fungerer slik....");
-        insertUtfall(db, "Må ta tre shots", 2);
         insertUtfall(db, "Pek på personen med størst nese", 1);
-        insertUtfall(db, "Jeg har aldri brent opp barbidukkene mine", 3);
-        insertUtfall(db, "Personen som søler neste gang må spandere drinker", 4);
-        insertUtfall(db, "Jeg har aldri spist en edderkopp", 3);
         insertUtfall(db, "Pek på den som er mest drita", 1);
+        insertUtfall(db, "Pek på den smarteste i rommet. Han/Hun tar 2 shots!", 1);
+        insertUtfall(db, "Pek på den med dårligst antrekk. Det blir 3 slurker på den personen!", 1);
+        insertUtfall(db, "Pek på han/hun som er mest edru. Personen må styrte en øl.", 1);
+        insertUtfall(db, "Pek på personen som er mest nerdete", 1);
+        insertUtfall(db, "Pek på den som du vet har jugd ikveld", 1);
+        insertUtfall(db, "Pek på en person du syns ser bra ut ikveld", 1);
+        insertUtfall(db, "Pek på den personen som er dårligst kledd!", 1);
+        insertUtfall(db, "Jeg har aldri brent opp barbidukkene mine", 2);
+        insertUtfall(db, "Jeg har aldri spist ute uten å betale regningen", 2);
+        insertUtfall(db, "Jeg har aldri stjålet", 2);
+        insertUtfall(db, "Jeg har aldri gått ut av kinosalen fordi filmen var dårlig", 2);
+        insertUtfall(db, "Jeg har aldri prøvd å klippe mitt eget hår", 2);
+        insertUtfall(db, "Jeg har aldri jukset på en prøve", 2);
+        insertUtfall(db, "Jeg har aldri kalt en kvinnelig lærer for 'mamma'", 2);
+        insertUtfall(db, "Jeg har aldri blitt stuck i en heis", 2);
+        insertUtfall(db, "Jeg har aldri farget håret mitt", 2);
+        insertUtfall(db, "Jeg har aldri våknet opp fra en drømm og hatet en person i virkeligheten", 2);
+        insertUtfall(db, "Jeg har aldri vært våken i 2 dager på rad", 2);
+        insertUtfall(db, "Jeg har aldri grått i offentligheten", 2);
+        insertUtfall(db, "Jeg har aldri lest en bok", 2);
+        insertUtfall(db, "Jeg har aldri spist en edderkopp", 2);
+        insertUtfall(db, "Jeg har aldri spionert på noen", 2);
+        insertUtfall(db, "Jeg har aldri brent opp barbidukkene mine", 2);
+        insertUtfall(db, "Jeg har aldri blitt kastet ut av en bar", 2);
+        insertUtfall(db, "Jeg har aldri brent opp barbidukkene mine", 2);
+        insertUtfall(db, "Jeg har aldri hørt på Nickleback", 2);
+        insertUtfall(db, "Personen som søler neste gang må spandere drinker", 3);
+        insertUtfall(db, "Personen som prater neste gang skal gjøre det godt igjen ved å ta 3 shots!", 3);
+        insertUtfall(db, "Personen som har på seg noe rødt plagg skal ta en hand-stand!", 3);
+        insertUtfall(db, "Personen som sovner først skal få gjennomgå", 3);
+
 
 
     }
@@ -74,19 +101,6 @@ public class dbHandler extends SQLiteOpenHelper {
         db.insert("Utfall", null, utfallValues);
     }
 
-    public void lagUtfall(){
-        SQLiteDatabase db = getWritableDatabase();
-        insertUtfall(db, "Må ta tre shots", 2);
-        insertUtfall(db, "Pek på personen med størst nese", 5);
-    }
-
-    public void dropUtfall(){
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS LEK");
-        db.execSQL("DROP TABLE IF EXISTS BILDE");
-        db.execSQL("DROP TABLE IF EXISTS UTFALL");
-        onCreate(db);
-    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -119,6 +133,7 @@ public class dbHandler extends SQLiteOpenHelper {
         }
     }
 
+    //db metode for å legge til en lek til databasen. metoden blir brukt i nyLekFragment linje 65 og 53
     public boolean addLek(String leknavn, String beskrivelse) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -137,34 +152,6 @@ public class dbHandler extends SQLiteOpenHelper {
             return true;
         }
     }
-
-
-    /*public String addBildeRef(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        List<String> returIDArr = new ArrayList<>();
-
-        byte[] array = new byte[7]; // length is bounded by 7
-        new Random().nextBytes(array);
-        String generatedString = new String(array, Charset.forName("UTF-8"));
-
-        cv.put("Filnavn", generatedString);
-        db.insert("Bilde", null, cv);
-        String query = ("SELECT idBILDE_PK from Bilde WHERE Filnavn = " + generatedString);
-        Cursor cursor = db.rawQuery(query, null);
-
-        //looper gjennom alle rader og legger dem til i lista
-        if (cursor.moveToFirst()) {
-            do {
-                returIDArr.add(cursor.getString(1));
-            } while (cursor.moveToNext());
-        }
-        String returID = returIDArr.get(1);
-        String r = "heisann";
-        return returID;
-    }
-    */
-
 
 
     //returnerer liste av leker
@@ -253,33 +240,8 @@ public class dbHandler extends SQLiteOpenHelper {
 
     }
 
-/*
-
-    List<String> lekFK = new ArrayList<>();
-
-    public List<String> setLekFK(String randomLek){
-        String query = ("SELECT * FROM LEK WHERE LEKNAVN = ?");
-        String [] args = new String[] {randomLek};
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, args);
-        if (cursor.moveToFirst()) {
-            do {
-                lekFK.add(cursor.getString(0));
-            } while (cursor.moveToNext());
-        }
-        return lekFK;
 
 
-    }
-
-
-    public List<String> getLekFK() {
-        //Utfall.add("heisann");
-        List<String> lekFK2 = new ArrayList<>(lekFK);
-        return lekFK2;
-    }
-
-*/
     List<String> Utfall = new ArrayList<>();
 
     public List<String> getUTfalltekst() {
@@ -362,6 +324,7 @@ public class dbHandler extends SQLiteOpenHelper {
 
     }
 
+    //metode som blir brukt i
     public String readBilde(String arg) {
         SQLiteDatabase db = getReadableDatabase();
         List<String> rows = new ArrayList<>();
@@ -372,6 +335,8 @@ public class dbHandler extends SQLiteOpenHelper {
         String rader = rows.get(0);
         return rader;
     }
+
+
     //metode som tar values fra klassen BaseColumns og klassen Bilde
     //siste value putter filnavnet som en string isteden for bitmap
     public boolean addBilde(Bilde bilde) {
@@ -386,6 +351,8 @@ public class dbHandler extends SQLiteOpenHelper {
 
         return db.insert(bildeBaseColumns.bildeEntry.TABLE_NAME, null, values) != -1;
     }
+
+
     public void knyttBildetilUtfall(String utfalltekst, String tittel){
         SQLiteDatabase db = getWritableDatabase();
         String fk;
@@ -405,18 +372,17 @@ public class dbHandler extends SQLiteOpenHelper {
         db.update("UTFALL", cv, "UTFALLTEKST = '"+utfalltekst +"'", null);
         db.close();
 
-
-
     }
 
 
-
+    //sletter alle utfall gjennom navigation drawer "Instillinger" knappen
     public void deleteAllUtfall(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM UTFALL";
         db.execSQL(query);
     }
 
+    //sletter alle bilder gjennom navigation drawer "Instillinger" knappen
     public void deleteAllBilder(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM BILDE";

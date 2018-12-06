@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">dinDrikkeLek</string>
+    <string name="app_name">DinDrikkeLek</string>
     <string name="nav_spill">Spill</string>
     <string name="nav_Endreleker">Endre/Legg til</string>
     <string name="nav_bilder">Bildebibliotek</string>
@@ -17,7 +17,6 @@
     <string name="kamera">Kamera</string>
     <string name="tilbake">Tilbake</string>
     <string name="lagre">Lagre</string>
-    <string name="SpraakogInndata">Språk og inndata</string>
     <string name="TrykkForSpill">Trykk hvor som helst for å begynne!</string>
     <string name="lagreTwist">Lagre</string>
     <string name="legg_til_navn">Legg til navn</string>
@@ -27,10 +26,7 @@
     <string name="ConfirmedDeleteBilder">Alle Bilder er nå slettet.</string>
     <string name="FAQTittel">FAQ</string>
     <string name="leggTilLek">Legg til lek</string>
-    <string name="faq_Q1">Hvordan fungerer Dindrikkelek?</string>
-    <string name="faq_A1">Dindrikkelek lar deg lage helt egne drikkeleker med egne Twister!</string>
-    <string name="faq_Q2">Hva er en Twist?</string>
-    <string name="faq_A2">En Twist er hva enn du vil det skal være. Det er dine egne utfall ut ifra lekene i spillet. Ved å legge til twist, legger du til nye regler i spillene!  </string>
+    <string name="faq_spm">Hvordan fungerer Dindrikkelek?\n\nDindrikkelek lar deg lage helt egne drikkeleker med egne Twister!\n\n\nHva er en Twist?\n\nEn Twist er hva enn du vil det skal være. Det er dine egne utfall ut ifra lekene i spillet. Ved å legge til Twist, legger du til nye regler i spillene!</string>
     <string name="TrykkHvorSomHelstSpill">Trykk hvor som helst på skjermen for å starte spillet! </string>
-    <string name="DeleteInfo">For å slette en twist, velg utfall/twist fra lista og hold inne</string>
+    <string name="DeleteInfo">For å slette en Twist, velg utfall/Twist fra lista og hold inne i to sekunder.</string>
 </resources>

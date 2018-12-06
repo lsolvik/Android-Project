@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">dinDrikkeLek</string>
+    <string name="app_name">YourDrinkingGame</string>
     <string name="nav_spill">Play</string>
     <string name="nav_Endreleker">Add/Delete</string>
     <string name="nav_bilder">Gallery</string>
@@ -19,7 +19,6 @@
     <string name="SpillLek">Play!</string>
     <string name="tilbake">Back</string>
     <string name="lagre">Save</string>
-    <string name="SpraakogInndata">Language and options</string>
     <string name="TrykkForSpill">Press anywhere to start playing!</string>
     <string name="lagreTwist">Save</string>
     <string name="legg_til_navn">Add Name</string>
@@ -28,10 +27,7 @@
     <string name="ConfirmedDelete">All twists are now deleted.</string>
     <string name="ConfirmedDeleteBilder">All pictures are now deleted.</string>
     <string name="leggTilLek">Add game</string>
-    <string name="faq_Q1">How does YourDrinkingGame work?</string>
-    <string name="faq_A1">YourDrinkingGame lets you make your own drinking games with your own Twists!</string>
-    <string name="faq_Q2">Whats a Twist?</string>
-    <string name="faq_A2">A Twist is whatever you want it to be. Its a result of your own rules to your own games. This way you can keep adding rules to your drinking games!. </string>
+    <string name="faq_spm">How does YourDrinkingGame work?\n\nYourDrinkingGame lets you make your own drinking games with your own Twists!\n\n\nWhats a Twist?\n\nA Twist is whatever you want it to be. Its a result of your own rules to your own games. This way you can keep adding rules to your drinking games!</string>
     <string name="TrykkHvorSomHelstSpill">Press anywhere at the screen to start playing!</string>
-    <string name="DeleteInfo">To delete a twist, select a twist from the list and hold it for two seconds</string>
+    <string name="DeleteInfo">To delete a Twist, select a Twist from the list and hold it for two seconds.</string>
 </resources>

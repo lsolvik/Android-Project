@@ -25,54 +25,16 @@
     <TextView
         android:id="@+id/textViewQ1"
         android:layout_width="365dp"
-        android:layout_height="25dp"
+        android:layout_height="346dp"
         android:layout_marginStart="9dp"
+        android:layout_marginTop="33dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="6dp"
-        android:text="@string/faq_Q1"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewA1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewA1"
-        android:layout_width="365dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/faq_A1"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewQ2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewQ2"
-        android:layout_width="365dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="3dp"
-        android:text="@string/faq_Q2"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewA2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewA2"
-        android:layout_width="365dp"
-        android:layout_height="149dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="196dp"
-        android:text="@string/faq_A2"
+        android:layout_marginBottom="130dp"
+        android:text="@string/faq_spm"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOverskrift1" />
 
 </android.support.constraint.ConstraintLayout>
