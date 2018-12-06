@@ -94,6 +94,7 @@ public class dbHandler extends SQLiteOpenHelper {
         lekValues.put("LEKNAVN", navn);
         lekValues.put("BESKRIVELSE", beskrivelse);
         db.insert("LEK", null, lekValues);
+        db.close();
     }
 
     private static void insertUtfall (SQLiteDatabase db, String Utfalltekst, int IdLEK_FK){
@@ -101,6 +102,7 @@ public class dbHandler extends SQLiteOpenHelper {
         utfallValues.put("UTFALLTEKST", Utfalltekst);
         utfallValues.put("idLEK_FK", IdLEK_FK);
         db.insert("Utfall", null, utfallValues);
+        db.close();
     }
 
 
@@ -110,6 +112,7 @@ public class dbHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS BILDE");
         db.execSQL("DROP TABLE IF EXISTS UTFALL");
         onCreate(db);
+        db.close();
     }
 
     //test
@@ -282,6 +285,7 @@ public class dbHandler extends SQLiteOpenHelper {
         if (data.moveToFirst()) {
             rows.add(data.getString(data.getColumnIndex("idUTFALL_PK")));
         }
+        db.close();
         fk = rows.get(0);
         return fk;
     }
@@ -296,6 +300,7 @@ public class dbHandler extends SQLiteOpenHelper {
         if (data.moveToFirst()) {
             rows.add(data.getString(data.getColumnIndex("idBILDE_FK")));
         }
+        db.close();
         fk = rows.get(0);
         return fk;
     }
@@ -307,6 +312,7 @@ public class dbHandler extends SQLiteOpenHelper {
                 "FROM LEK, UTFALL\n" +
                 "WHERE idLEK_PK = idLEK_FK;";
         Cursor data = db.rawQuery(query, null);
+        db.close();
         return data;
     }
     //metode for å lese alle bilder. blir brukt i bildeGalleriActivity linje 21
@@ -322,6 +328,7 @@ public class dbHandler extends SQLiteOpenHelper {
                 null,
                 null
 
+
         );
 
     }
@@ -335,6 +342,7 @@ public class dbHandler extends SQLiteOpenHelper {
             rows.add(c.getString(c.getColumnIndex("FILNAVN")));
         }
         String rader = rows.get(0);
+        db.close();
         return rader;
     }
 
@@ -349,6 +357,7 @@ public class dbHandler extends SQLiteOpenHelper {
         values = new ContentValues();
         values.put(bildeBaseColumns.bildeEntry.COLUMN_BILDEBESKRIVELSE, bilde.getBeskrivelse());
         values.put(bildeBaseColumns.bildeEntry.COLUMN_FILNAVN, bilde.getImageAsString());
+        db.close();
 
 
         return db.insert(bildeBaseColumns.bildeEntry.TABLE_NAME, null, values) != -1;
@@ -382,6 +391,7 @@ public class dbHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM UTFALL";
         db.execSQL(query);
+        db.close();
     }
 
     //sletter alle bilder gjennom navigation drawer "Instillinger" knappen
@@ -389,6 +399,7 @@ public class dbHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM BILDE";
         db.execSQL(query);
+        db.close();
 
     }
 
@@ -397,6 +408,7 @@ public class dbHandler extends SQLiteOpenHelper {
         db.execSQL("PRAGMA foreign_keys = ON");
         String query = "DELETE FROM LEK";
         db.execSQL(query);
+        db.close();
     }
 
 }
