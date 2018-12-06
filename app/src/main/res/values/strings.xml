@@ -35,4 +35,8 @@
     <string name="DeleteInfo">For å slette en twist, velg utfall/twist fra lista og hold inne</string>
     <string name="ConfirmedDeleteLeker">Alle leker er nå slettet</string>
     <string name="ConfirmedDeleteTwists">Alle twister er nå slettet</string>
+    <string name="ErrorGame">Kan ikke kjøre spillet. Mangler enten leker eller utfall</string>
+    <string name="ErrorPic">Kan ikke lagre bilde. Kan hende det ikke finnes utfall/twist å knytte det til</string>
+    <string name="PicAdded">Bilde lagret!</string>
+    <string name="PickNotAdded">Bilde ble ikke lagret. Noe gikk galt</string>
 </resources>
