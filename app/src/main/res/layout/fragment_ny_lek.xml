@@ -10,8 +10,7 @@
         android:id="@+id/EditLekNavn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:hint="@string/legg_til_navn"
+        android:hint="@string/legg_til_lek"
         android:inputType=""
         android:textSize="20sp" />
 
@@ -19,7 +18,6 @@
         android:id="@+id/EditLekBeskrivelse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints=""
         android:hint="@string/legg_til_beskrivelse"
         android:inputType=""
         android:textSize="20sp" />
