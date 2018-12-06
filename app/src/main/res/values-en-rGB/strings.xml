@@ -33,6 +33,6 @@
     <string name="faq_A1">YourDrinkingGame lets you make your own drinking games with your own Twists!</string>
     <string name="faq_Q2">Whats a Twist?</string>
     <string name="faq_A2">A Twist is whatever you want it to be. Its a result of your own rules to your own games. This way you can keep adding rules to your drinkinggames!. </string>
-    <string name="TrykkHvorSomHelstSpill">Press anywhere at the screen to start playing!></string>
+    <string name="TrykkHvorSomHelstSpill">Press anywhere at the screen to start playing!</string>
     <string name="DeleteInfo">To delete a twist, select a twist from the list and hold it for two seconds</string>
 </resources>
