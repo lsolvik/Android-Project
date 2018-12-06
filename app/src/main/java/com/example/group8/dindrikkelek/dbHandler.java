@@ -312,7 +312,7 @@ public class dbHandler extends SQLiteOpenHelper {
                 "FROM LEK, UTFALL\n" +
                 "WHERE idLEK_PK = idLEK_FK;";
         Cursor data = db.rawQuery(query, null);
-        db.close();
+       // db.close();
         return data;
     }
     //metode for å lese alle bilder. blir brukt i bildeGalleriActivity linje 21
@@ -357,7 +357,6 @@ public class dbHandler extends SQLiteOpenHelper {
         values = new ContentValues();
         values.put(bildeBaseColumns.bildeEntry.COLUMN_BILDEBESKRIVELSE, bilde.getBeskrivelse());
         values.put(bildeBaseColumns.bildeEntry.COLUMN_FILNAVN, bilde.getImageAsString());
-        db.close();
 
 
         return db.insert(bildeBaseColumns.bildeEntry.TABLE_NAME, null, values) != -1;
