@@ -1,9 +1,8 @@
 package com.example.group8.dindrikkelek;
 
-import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.CursorAdapter;
 import android.widget.GridView;
 

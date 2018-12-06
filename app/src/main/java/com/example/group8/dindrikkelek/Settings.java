@@ -124,6 +124,9 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         }
     }
 
+
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
@@ -132,6 +135,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.nav_endreleker:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
                         new EndreLeggTil()).commit();
+                onDestroy();
                 break;
             case R.id.navn_spill:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,

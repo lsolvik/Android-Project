@@ -1,18 +1,13 @@
 package com.example.group8.dindrikkelek;
 
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.group8.dindrikkelek.R;
-import com.example.group8.dindrikkelek.nyttBilde;
 
 public class EndreLeggTil extends Fragment implements View.OnClickListener {
 
