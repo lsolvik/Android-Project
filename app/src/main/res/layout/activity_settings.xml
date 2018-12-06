@@ -14,7 +14,7 @@
     <ListView
         android:id="@+id/SettingsList"
         android:layout_width="match_parent"
-        android:layout_height="448dp"
+        android:layout_height="562dp"
         android:layout_marginTop="100dp"
 
         android:entries="@array/Settings"
@@ -24,21 +24,6 @@
 
     </ListView>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/SpraakogInndata"
-        android:textColor="#4DB6AC"
-        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 </android.support.constraint.ConstraintLayout>
