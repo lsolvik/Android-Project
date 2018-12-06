@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">dinDrikkeLek</string>
     <string name="nav_spill">Spill</string>
-    <string name="nav_Endreleker">Endre/legg til leker</string>
+    <string name="nav_Endreleker">Endre/Legg til</string>
     <string name="nav_bilder">Bildebibliotek</string>
     <string name="nav_instillinger">Instillinger</string>
     <string name="nav_help">Hjelp</string>
-    <string name="nav_feedback">Gi tilbakemelding</string>
     <string name="nav_support">Brukerstøtte</string>
     <string name="toolbar_menu_hamburger">Meny</string>
-    <string name="legg_til_twist">Legg til/slett Twist</string>
+    <string name="legg_til_twist">Legg til/Slett Twist</string>
     <string name="endre_twist">Endre Twist</string>
     <string name="fjern_twist">Fjern Twist</string>
     <string name="legg_til_bilde">Legg til bilde</string>
@@ -31,7 +30,7 @@
     <string name="faq_Q1">Hvordan fungerer Dindrikkelek?</string>
     <string name="faq_A1">Dindrikkelek lar deg lage helt egne drikkeleker med egne Twister!</string>
     <string name="faq_Q2">Hva er en Twist?</string>
-    <string name="faq_A2">En Twist er hva enn du vil det skal være. Det er et verktøy for å bestemme hva en lek innebærer og hvordan leken fungerer. </string>
+    <string name="faq_A2">En Twist er hva enn du vil det skal være. Det er dine egne utfall ut ifra lekene i spillet. Ved å legge til twist, legger du til nye regler i spillene!  </string>
     <string name="TrykkHvorSomHelstSpill">Trykk hvor som helst på skjermen for å starte spillet! </string>
     <string name="DeleteInfo">For å slette en twist, velg utfall/twist fra lista og hold inne</string>
 </resources>

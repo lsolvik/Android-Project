@@ -14,16 +14,22 @@
     <ListView
         android:id="@+id/SettingsList"
         android:layout_width="match_parent"
-        android:layout_height="562dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="448dp"
+        android:layout_marginStart="8dp"
 
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:entries="@array/Settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintVertical_bias="0.0">
 
 
     </ListView>
-
 
 
 </android.support.constraint.ConstraintLayout>
