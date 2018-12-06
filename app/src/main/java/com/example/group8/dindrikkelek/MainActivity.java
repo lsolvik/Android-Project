@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 break;
             case R.id.nav_settings:
-                intent = new Intent(this, Settings.class);
-                startActivity(intent);
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                        new Settings()).commit();
                 break;
 
         }
