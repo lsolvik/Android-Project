@@ -6,12 +6,17 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -19,7 +24,7 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
-public class Settings extends AppCompatActivity {
+public class Settings extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     dbHandler myDbHandler;
 
@@ -28,6 +33,7 @@ public class Settings extends AppCompatActivity {
     {
         return contextOfApplication;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,9 @@ public class Settings extends AppCompatActivity {
 
         //setter icon til drawable
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_hamburger);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         //Create an OnItemClickListener
         AdapterView.OnItemClickListener itemClickListener =
@@ -83,12 +92,16 @@ public class Settings extends AppCompatActivity {
 
         };
 
-//Add the listener to the list view
+
+        //Add the listener to the list view
         ListView listView = (ListView) findViewById(R.id.SettingsList);
         listView.setOnItemClickListener(itemClickListener);
 
 
     }
+
+    //Implementing this method adds any items in
+    //the menu resource file to the app bar.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the app bar.
@@ -96,4 +109,77 @@ public class Settings extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //This method gets called when an
+    //action on the app bar is clicked.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+
+        switch (item.getItemId()) {
+            case R.id.action_menu:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        final Intent intent;
+        switch (menuItem.getItemId()) {
+            case R.id.nav_endreleker:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                        new EndreLeggTil()).commit();
+                break;
+            case R.id.navn_spill:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                        new hovedside_frag()).commit();
+                break;
+            case R.id.nav_help:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                        new hjelpFragment()).commit();
+                break;
+            case R.id.nav_bildegalleri:
+                intent = new Intent(this, bildeGalleriActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_settings:
+                intent = new Intent(this, Settings.class);
+                startActivity(intent);
+                break;
+
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+        if (f instanceof EndreLeggTil) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+        } else if (f instanceof NyTwistFragment) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                    new EndreLeggTil()).commit();
+
+        }  else if (f instanceof nyttBilde) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
+                    new EndreLeggTil()).commit();
+        }else if (f instanceof nyLekFragment) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new EndreLeggTil()).commit();
+
+        }else if(f instanceof hjelpFragment) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+
+        else {
+            super.onBackPressed();
+        }
+    }
 }
