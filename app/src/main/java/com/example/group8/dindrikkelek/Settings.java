@@ -15,20 +15,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Locale;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class Settings extends Fragment {
 
     dbHandler myDbHandler;
+    ListView settingslist;
 
     public static Context contextOfApplication;
     public static Context getContextOfApplication()
@@ -84,10 +91,23 @@ public class Settings extends Fragment {
 
 
         //Add the listener to the list view
-        ListView listView = getView().findViewById(R.id.SettingsList);
-        listView.setOnItemClickListener(itemClickListener);
+
+
+        settingslist = view.findViewById(R.id.SettingsList);
+        settingslist.setOnItemClickListener(itemClickListener);
+        loadListView();
+
 
         return view;
+
+    }
+    private void loadListView(){
+        Log.d(TAG,"Viser data i listview.");
+        String[] listdata;
+
+
+        listdata = getResources().getStringArray(R.array.Settings);
+        ListAdapter adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, listdata);
 
     }
 }
