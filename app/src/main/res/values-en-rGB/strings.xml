@@ -8,7 +8,7 @@
     <string name="nav_help">Help</string>
     <string name="nav_support">Support</string>
     <string name="toolbar_menu_hamburger">Menu</string>
-    <string name="legg_til_twist">Add Twist</string>
+    <string name="legg_til_twist">Add/Delete Twist</string>
     <string name="endre_twist">Edit Twist</string>
     <string name="fjern_twist">Delete Twist</string>
     <string name="legg_til_bilde">Add Picture</string>
@@ -21,7 +21,7 @@
     <string name="lagre">Save</string>
     <string name="TrykkForSpill">Press anywhere to start playing!</string>
     <string name="lagreTwist">Save</string>
-    <string name="legg_til_navn">Add Name</string>
+    <string name="legg_til_navn">Write your twist here</string>
     <string name="FAQTittel">FAQ</string>
     <string name="legg_til_beskrivelse">Add a description</string>
     <string name="ConfirmedDelete">All twists are now deleted.</string>
@@ -37,4 +37,7 @@
     <string name="PicAdded">Image has been saved!</string>
     <string name="PickNotAdded">Something went wrong. Picture has not been saved</string>
     <string name="BildeTittel">Title of image</string>
+    <string name="BekreftSlett">Confirm if you want to delete following twist</string>
+    <string name="Slett">Delete</string>
+
 </resources>

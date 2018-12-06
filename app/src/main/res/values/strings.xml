@@ -19,7 +19,7 @@
     <string name="lagre">Lagre</string>
     <string name="TrykkForSpill">Trykk hvor som helst for å begynne!</string>
     <string name="lagreTwist">Lagre</string>
-    <string name="legg_til_navn">Legg til navn</string>
+    <string name="legg_til_navn">Skriv inn twisten din her</string>
     <string name="legg_til_beskrivelse">Legg til beskrivelse</string>
     <string name="SpillLek">Spill!</string>
     <string name="ConfirmedDelete">Alle twister er nå slettet.</string>
@@ -36,4 +36,6 @@
     <string name="PicAdded">Bilde lagret!</string>
     <string name="PickNotAdded">Bilde ble ikke lagret. Noe gikk galt</string>
     <string name="BildeTittel">Bildetittel</string>
+    <string name="BekreftSlett">Bekreft for å slette følgende utfall/twist</string>
+    <string name="Slett">Slett</string>
 </resources>
