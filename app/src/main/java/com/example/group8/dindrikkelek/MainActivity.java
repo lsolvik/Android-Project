@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        new Settings()).commit();
+                        new settingsFragment()).commit();
                 break;
 
         }

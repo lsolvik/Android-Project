@@ -17,8 +17,6 @@
         </activity>
         <activity android:name=".SpillActivity"
          />
-        <activity android:name=".Settings"
-            android:label="@string/nav_instillinger"/>
         <activity android:name=".bildeGalleriActivity" />
     </application>
 

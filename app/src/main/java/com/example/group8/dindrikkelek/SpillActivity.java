@@ -60,7 +60,7 @@ public class SpillActivity extends AppCompatActivity {
             getLeker();
         } catch (Exception e){
             String error = getResources().getString(R.string.ErrorGame);
-            Toast t = Toast.makeText(this, error, Toast.LENGTH_SHORT);
+            Toast t = Toast.makeText(this, error, Toast.LENGTH_LONG);
             t.show();
         }
 
