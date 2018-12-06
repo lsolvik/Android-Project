@@ -2,7 +2,8 @@
 <resources>
     <string-array name="Settings">
         <item>Delete pictures</item>
-        <item>Remove data</item>
+        <item>Delete all twists/rules</item>
+        <item>Delete all games</item>
         <item>Back</item>
     </string-array>
 

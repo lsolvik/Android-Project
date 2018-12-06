@@ -30,4 +30,11 @@
     <string name="faq_spm">How does YourDrinkingGame work?\n\nYourDrinkingGame lets you make your own drinking games with your own Twists!\n\n\nWhats a Twist?\n\nA Twist is whatever you want it to be. Its a result of your own rules to your own games. This way you can keep adding rules to your drinking games!</string>
     <string name="TrykkHvorSomHelstSpill">Press anywhere at the screen to start playing!</string>
     <string name="DeleteInfo">To delete a Twist, select a Twist from the list and hold it for two seconds.</string>
+    <string name="ConfirmedDeleteLeker">All games are now deleted</string>
+    <string name="ConfirmedDeleteTwists">All twists are now deleted</string>
+    <string name="ErrorGame">Cannot run game. Game may be missing subgames</string>
+    <string name="ErrorPic">Cannot save image. Missing twist. Have you added any?</string>
+    <string name="PicAdded">Image has been saved!</string>
+    <string name="PickNotAdded">Something went wrong. Picture has not been saved</string>
+    <string name="BildeTittel">Title of image</string>
 </resources>

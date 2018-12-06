@@ -26,15 +26,17 @@ public class dbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+
         db.execSQL("CREATE TABLE IF NOT EXISTS LEK ("
                 + "idLEK_PK INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, "
                 + "LEKNAVN TEXT NOT NULL, "
-                + "BESKRIVELSE TEXT NOT NULL);");
+                + "BESKRIVELSE TEXT NOT NULL)");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS BILDE ("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, "
                 + "FILNAVN TEXT, "
-                + "BILDEBESKRIVELSE TEXT);");
+                + "BILDEBESKRIVELSE TEXT)");
 
 
         db.execSQL("CREATE TABLE IF NOT EXISTS UTFALL ("
@@ -42,8 +44,8 @@ public class dbHandler extends SQLiteOpenHelper {
                 + "UTFALLTEKST TEXT NOT NULL, "
                 + "idLEK_FK INTEGER NOT NULL, "
                 + "idBILDE_FK INTEGER, "
-                + "FOREIGN KEY (idLEK_FK) REFERENCES LEK (idLEK_PK), "
-                + "FOREIGN KEY (idBILDE_FK) REFERENCES BILDE (_id));");
+                + "CONSTRAINT fk_idlek FOREIGN KEY (idLEK_FK) REFERENCES LEK (idLEK_PK) ON DELETE CASCADE, "
+                + "CONSTRAINT fk_idbilde FOREIGN KEY (idBILDE_FK) REFERENCES BILDE (_id)ON DELETE CASCADE)");
 
         //testdata. beskrivelsetekst er kun placeholder/eksempler
         insertLek(db, "Pekelek", "Pekeleken fungerer slik....");
@@ -388,6 +390,13 @@ public class dbHandler extends SQLiteOpenHelper {
         String query = "DELETE FROM BILDE";
         db.execSQL(query);
 
+    }
+
+    public void deleteAllLeker() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("PRAGMA foreign_keys = ON");
+        String query = "DELETE FROM LEK";
+        db.execSQL(query);
     }
 
 }

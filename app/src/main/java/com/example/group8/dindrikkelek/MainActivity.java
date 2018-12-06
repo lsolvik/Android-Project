@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         contextOfApplication = getApplicationContext();
+        //mydbhandler.dropUtfall();
 
 
         //ber activity om å bruke toolbar som sin app bar

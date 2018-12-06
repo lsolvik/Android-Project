@@ -122,20 +122,27 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
     //tar et image som bitmap og nytt bildeobjekt med tittel
     public void lagreBilde() {
         Bitmap image = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
-        boolean test = new dbHandler(getActivity()).addBilde(new Bilde(tittelEditText.getText().toString(), image));
+        try {
 
-        if(test) {
-            toastMessage("Bilde lagt til!");
-        } else {
-            toastMessage("Noe gikk galt.");
+            String Utfalltekst = spinner.getSelectedItem().toString();
+            String tittel = tittelEditText.getText().toString();
+
+            new dbHandler(getContext()).knyttBildetilUtfall(Utfalltekst, tittel);
+            // Toast t = Toast.makeText(getContext(), toasti, Toast.LENGTH_LONG);
+            //   t.show();
+            boolean test = new dbHandler(getActivity()).addBilde(new Bilde(tittelEditText.getText().toString(), image));
+            if(test) {
+                String error = getResources().getString(R.string.PicAdded);
+                toastMessage(error);
+            } else {
+                String error = getResources().getString(R.string.PickNotAdded);
+                toastMessage(error);
+            }
+        } catch (Exception e){
+            String error = getResources().getString(R.string.ErrorPic);
+            Toast t =Toast.makeText(getContext(), error, Toast.LENGTH_LONG);
+            t.show();
         }
-
-        String Utfalltekst = spinner.getSelectedItem().toString();
-        String tittel = tittelEditText.getText().toString();
-
-        new dbHandler(getContext()).knyttBildetilUtfall(Utfalltekst, tittel);
-        // Toast t = Toast.makeText(getContext(), toasti, Toast.LENGTH_LONG);
-        //   t.show();
     }
 
     @Override
@@ -184,7 +191,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tilbake:
                 getFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        new hovedside_frag()).commit();
+                        new EndreLeggTil()).commit();
         }
     }
 

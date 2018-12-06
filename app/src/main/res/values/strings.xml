@@ -29,4 +29,11 @@
     <string name="faq_spm">Hvordan fungerer Dindrikkelek?\n\nDindrikkelek lar deg lage helt egne drikkeleker med egne Twister!\n\n\nHva er en Twist?\n\nEn Twist er hva enn du vil det skal være. Det er dine egne utfall ut ifra lekene i spillet. Ved å legge til Twist, legger du til nye regler i spillene!</string>
     <string name="TrykkHvorSomHelstSpill">Trykk hvor som helst på skjermen for å starte spillet! </string>
     <string name="DeleteInfo">For å slette en Twist, velg utfall/Twist fra lista og hold inne i to sekunder.</string>
+    <string name="ConfirmedDeleteLeker">Alle leker er nå slettet</string>
+    <string name="ConfirmedDeleteTwists">Alle twister er nå slettet</string>
+    <string name="ErrorGame">Kan ikke kjøre spillet. Mangler enten leker eller utfall</string>
+    <string name="ErrorPic">Kan ikke lagre bilde. Kan hende det ikke finnes utfall/twist å knytte det til</string>
+    <string name="PicAdded">Bilde lagret!</string>
+    <string name="PickNotAdded">Bilde ble ikke lagret. Noe gikk galt</string>
+    <string name="BildeTittel">Bildetittel</string>
 </resources>

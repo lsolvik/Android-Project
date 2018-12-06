@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Settings">
-        <item>Fjern Bilder</item>
-        <item>Fjern Data</item>
+        <item>Fjern alle Bilder</item>
+        <item>Fjern alle twister/regler</item>
+        <item>Fjern alle leker</item>
         <item>Tilbake</item>
     </string-array>
 

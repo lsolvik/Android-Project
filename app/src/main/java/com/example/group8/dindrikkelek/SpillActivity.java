@@ -73,8 +73,13 @@ public class SpillActivity extends AppCompatActivity {
         //t.setText("");
         selectedImageView = view.findViewById(R.id.bildeview);
         selectedImageView.setImageDrawable(null);
-        getLeker();
-
+        try {
+            getLeker();
+        } catch (Exception e){
+            String error = getResources().getString(R.string.ErrorGame);
+            Toast t = Toast.makeText(this, error, Toast.LENGTH_LONG);
+            t.show();
+        }
 
 
 
