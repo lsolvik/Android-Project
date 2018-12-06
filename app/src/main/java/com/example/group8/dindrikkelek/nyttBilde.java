@@ -1,13 +1,8 @@
 package com.example.group8.dindrikkelek;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.ContextWrapper;
+
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -23,17 +18,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.group8.dindrikkelek.R;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -43,13 +31,6 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
     private ImageView selectedImageView;
     private EditText tittelEditText;
     Spinner spinner;
-    Bitmap bitmap;
-    Bitmap img;
-    byte byteArray[];
-    dbHandler Mydbhandler;
-    Uri imageUri;
-    Context applicationContext = MainActivity.getContextOfApplication();
-
 
 
     public nyttBilde() {
@@ -94,21 +75,6 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
 
 
     }
-/*
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-        if resultCo
-        try {
-            bitmap = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
-            savedInstanceState.putParcelable("Bitmapimage", bitmap);
-        } catch(Exception e) {
-            e.getMessage();
-        }
-
-
-    }
-    */
 
 
     // metode for å åpne kameraet på telefonen
@@ -127,9 +93,6 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
             String Utfalltekst = spinner.getSelectedItem().toString();
             String tittel = tittelEditText.getText().toString();
 
-            new dbHandler(getContext()).knyttBildetilUtfall(Utfalltekst, tittel);
-            // Toast t = Toast.makeText(getContext(), toasti, Toast.LENGTH_LONG);
-            //   t.show();
             boolean test = new dbHandler(getActivity()).addBilde(new Bilde(tittelEditText.getText().toString(), image));
             if(test) {
                 String error = getResources().getString(R.string.PicAdded);
@@ -138,6 +101,8 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
                 String error = getResources().getString(R.string.PickNotAdded);
                 toastMessage(error);
             }
+
+            new dbHandler(getContext()).knyttBildetilUtfall(Utfalltekst, tittel);
         } catch (Exception e){
             String error = getResources().getString(R.string.ErrorPic);
             Toast t =Toast.makeText(getContext(), error, Toast.LENGTH_LONG);
@@ -161,7 +126,7 @@ public class nyttBilde extends Fragment implements View.OnClickListener {
         else if(resultCode == RESULT_OK && requestCode== CAMERA_REQUEST_CODE ) {
             Bitmap img = (Bitmap)data.getExtras().get("data");
             selectedImageView.setImageBitmap(img);
-            byte[] photo = Utility.getBytes(img);
+
 
         }
 

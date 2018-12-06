@@ -1,22 +1,12 @@
 package com.example.group8.dindrikkelek;
-
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -28,7 +18,6 @@ public class SpillActivity extends AppCompatActivity {
     Bitmap bitmap;
     Bitmap img;
     String utfall;
-    Uri imageuri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +25,6 @@ public class SpillActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spill);
         myDbHandler = new dbHandler(this);
         myDbHandler.getAllLeker();
-        //myDbHandler.dropUtfall();
-        //  myDbHandler.lagUtfall();
-        // View spillc = findViewById(R.id.spill_content);
         if (savedInstanceState != null) {
             img = savedInstanceState.getParcelable("Bitmapimage");
             selectedImageView = findViewById(R.id.bildeview);
@@ -65,24 +51,18 @@ public class SpillActivity extends AppCompatActivity {
 
     }
 
-    // @Override
+
     public void onClickShuffle(View view) {
 
-      //  TextView t = findViewById(R.id.text_info);
-      //  myDbHandler.dropUtfall();
-        //t.setText("");
         selectedImageView = view.findViewById(R.id.bildeview);
         selectedImageView.setImageDrawable(null);
         try {
             getLeker();
         } catch (Exception e){
             String error = getResources().getString(R.string.ErrorGame);
-            Toast t = Toast.makeText(this, error, Toast.LENGTH_LONG);
+            Toast t = Toast.makeText(this, error, Toast.LENGTH_SHORT);
             t.show();
         }
-
-
-
 
     }
 
@@ -99,22 +79,14 @@ public class SpillActivity extends AppCompatActivity {
 
 
         }
-        String randomID = leker.get(0);
         return liste;
     }
 
     public void getLeker() {
         String lekid = getRandomLekID();
-        //TextView t = findViewById(R.id.text_info);
-        //   t.setText(randomLek);
         myDbHandler.setLekerFK(lekid);
-        List<String> leker2 = myDbHandler.getLekerFK();
-        String output = leker2.toString();
+        List<String> leker2 = myDbHandler.getLekerFK();;
         getUtfall(leker2.get(0));
-        //t.setText(output);
-
-
-
 
 
     }
@@ -124,13 +96,10 @@ public class SpillActivity extends AppCompatActivity {
         List<String> Utfallliste = myDbHandler.getUTfalltekst();
 
         Random rand = new Random();
-        //String heisann = pk.toString();
-        String liste = Utfallliste.toString();
 
         for (int counter = 0; counter < Utfallliste.size(); counter++) {
             int randomIndex = rand.nextInt(Utfallliste.size());
             String randomUtfall = Utfallliste.get(randomIndex);
-            String gammelverdi = randomUtfall;
             TextView UtfallTekst = findViewById(R.id.text_utfall);
             UtfallTekst.setText(randomUtfall);
             String UtfallPK = myDbHandler.getUtfallPK(randomUtfall);
@@ -146,22 +115,9 @@ public class SpillActivity extends AppCompatActivity {
                     e.getMessage();
 
                 }
-
-                break;
-            } else if (bilde == null) {
-                Toast t = Toast.makeText(this, "Denne har IKKE bilde", Toast.LENGTH_SHORT);
-                t.show();
                 break;
             }
-
-
         }
-
-
-
-
-
-
     }
 }
 

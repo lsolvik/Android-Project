@@ -66,7 +66,7 @@ public class dbHandler extends SQLiteOpenHelper {
         insertUtfall(db, "Jeg har aldri gått ut av kinosalen fordi filmen var dårlig", 2);
         insertUtfall(db, "Jeg har aldri prøvd å klippe mitt eget hår", 2);
         insertUtfall(db, "Jeg har aldri jukset på en prøve", 2);
-        insertUtfall(db, "Jeg har aldri kalt en kvinnelig lærer for 'mamma'", 2);
+        insertUtfall(db, "Jeg har aldri kalt en kvinnelig lærer for mamma", 2);
         insertUtfall(db, "Jeg har aldri blitt stuck i en heis", 2);
         insertUtfall(db, "Jeg har aldri farget håret mitt", 2);
         insertUtfall(db, "Jeg har aldri våknet opp fra en drømm og hatet en person i virkeligheten", 2);
