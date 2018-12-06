@@ -85,8 +85,10 @@ public class NyTwistFragment extends Fragment implements AdapterView.OnItemSelec
 
                 //invoke dialogvindu
                 build = new AlertDialog.Builder(getActivity());
-                build.setTitle("Slett utfall");
-                build.setMessage("Bekreft for å slette følgende utfall:\n\n'" + listview.getItemAtPosition(position) + "'");
+                String confirm = getResources().getString(R.string.BekreftSlett);
+                String slett = getResources().getString(R.string.Slett);
+                build.setTitle(slett);
+                build.setMessage(confirm + ":" + "\n\n'" + listview.getItemAtPosition(position) + "'");
 
 
                 //Dialogknapp for sletting

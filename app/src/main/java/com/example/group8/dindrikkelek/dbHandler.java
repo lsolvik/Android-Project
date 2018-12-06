@@ -40,7 +40,7 @@ public class dbHandler extends SQLiteOpenHelper {
                 + "idLEK_FK INTEGER NOT NULL, "
                 + "idBILDE_FK INTEGER, "
                 + "CONSTRAINT fk_idlek FOREIGN KEY (idLEK_FK) REFERENCES LEK (idLEK_PK) ON DELETE CASCADE, "
-                + "CONSTRAINT fk_idbilde FOREIGN KEY (idBILDE_FK) REFERENCES BILDE (_id)ON DELETE CASCADE)");
+                + "CONSTRAINT fk_idbilde FOREIGN KEY (idBILDE_FK) REFERENCES BILDE (_id))");
 
         //testdata. beskrivelsetekst er kun placeholder/eksempler
         insertLek(db, "Pekelek", "Pekeleken fungerer slik....");
