@@ -24,7 +24,7 @@ public class SpillActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spill);
         myDbHandler = new dbHandler(this);
-        myDbHandler.getAllLeker();
+//        myDbHandler.getAllLeker();
         if (savedInstanceState != null) {
             img = savedInstanceState.getParcelable("Bitmapimage");
             selectedImageView = findViewById(R.id.bildeview);

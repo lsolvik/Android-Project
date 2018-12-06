@@ -89,7 +89,7 @@ public class dbHandler extends SQLiteOpenHelper {
         lekValues.put("LEKNAVN", navn);
         lekValues.put("BESKRIVELSE", beskrivelse);
         db.insert("LEK", null, lekValues);
-        db.close();
+
     }
 
     private static void insertUtfall (SQLiteDatabase db, String Utfalltekst, int IdLEK_FK){
@@ -97,7 +97,7 @@ public class dbHandler extends SQLiteOpenHelper {
         utfallValues.put("UTFALLTEKST", Utfalltekst);
         utfallValues.put("idLEK_FK", IdLEK_FK);
         db.insert("Utfall", null, utfallValues);
-        db.close();
+
     }
 
 
@@ -107,7 +107,6 @@ public class dbHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS BILDE");
         db.execSQL("DROP TABLE IF EXISTS UTFALL");
         onCreate(db);
-        db.close();
     }
 
     //test
