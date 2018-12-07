@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DinDrikkeLek</string>
     <string name="nav_spill">Spill</string>
-    <string name="nav_Endreleker">Endre/Legg til</string>
+    <string name="nav_Endreleker">Legg til/Slett</string>
     <string name="nav_bilder">Bildebibliotek</string>
     <string name="nav_instillinger">Instillinger</string>
     <string name="nav_help">Hjelp</string>
