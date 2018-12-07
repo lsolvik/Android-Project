@@ -244,7 +244,6 @@ public class dbHandler extends SQLiteOpenHelper {
     List<String> Utfall = new ArrayList<>();
 
     public List<String> getUTfalltekst() {
-        //Utfall.add("heisann");
         List<String> Utfall2 = new ArrayList<>(Utfall);
         return Utfall2;
     }
