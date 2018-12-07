@@ -24,7 +24,6 @@ public class SpillActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spill);
         myDbHandler = new dbHandler(this);
-//        myDbHandler.getAllLeker();
         if (savedInstanceState != null) {
             img = savedInstanceState.getParcelable("Bitmapimage");
             selectedImageView = findViewById(R.id.bildeview);
@@ -85,7 +84,7 @@ public class SpillActivity extends AppCompatActivity {
     public void getLeker() {
         String lekid = getRandomLekID();
         myDbHandler.setLekerFK(lekid);
-        List<String> leker2 = myDbHandler.getLekerFK();;
+        List<String> leker2 = myDbHandler.getLekerFK();
         getUtfall(leker2.get(0));
 
 

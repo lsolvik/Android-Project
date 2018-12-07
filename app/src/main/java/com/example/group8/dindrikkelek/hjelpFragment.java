@@ -22,15 +22,6 @@ public class hjelpFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hjelp, container, false);
 
-        /*
-        TextView qna = view.findViewById(R.id.txtFaQ);
-
-        qna.setText("Q: Hva er Dindrikkelek?\n" +
-                "A: Dindrikkelek er en egendefinert, letthjertet drikkelek rettet mot studenter og " +
-                "voksne!\n\n" +
-                "Q: Hva er en Twist og hvordan legger jeg til en Twist?");
-        */
-
         return view;
     }
 
